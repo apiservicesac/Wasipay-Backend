@@ -1,0 +1,26 @@
+import { NextFunction, Request, Response } from 'express'
+
+import { DeleteUseCase as UseCase } from '@/shop/application/use_cases';
+import { ImplementationSequelize } from '@/shop/infrastructure/implementacion/sequelize';
+
+export const deleteController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        
+        const { id } = req.query;
+
+        const sequelizeRepository = new ImplementationSequelize()
+        const useCase = new UseCase(sequelizeRepository)
+        
+        await useCase.run(id!.toString())
+
+        res.status(200).json({
+            status: 'deleted',
+            code: 200,
+            message: 'Registro Eliminado Correctamente',
+            data: null
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}

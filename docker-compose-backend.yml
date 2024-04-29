@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  azzorti_backend_js:
+    container_name: azzorti_backend_js
+    image: azzorti_backend_js
+    build: .
+    ports:
+      - "${PORT_JS}:${PORT_JS}"
+    env_file:
+      - .env
