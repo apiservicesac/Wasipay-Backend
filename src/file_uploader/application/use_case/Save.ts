@@ -20,7 +20,7 @@ export class SaveUseCase {
         this._file_uploader = new FileUploader()
     }
 
-    async run(files: UploadedFile | UploadedFile[] | undefined, tableName: string, fid: string): Promise<boolean> {
+    async run(files: UploadedFile | UploadedFile[] | undefined): Promise<Entity[]> {
         
         if(!files) throw new FileUploadException()
 
@@ -32,26 +32,25 @@ export class SaveUseCase {
             request_files = [files!];
         }
         
+        const entities_response : any = request_files.map(async (file) => {
+            const is_file_valid = this._file_validator.run(file)
 
-        const files_uploaded = Promise.all(
-            request_files.map(async (file) => {
-                const is_file_valid = this._file_validator.run(file)
-    
-                if(!is_file_valid) throw new FileValidatorException()
-    
-                const file_uploaded : any = await this._file_uploader.upload(file)                       
-                return file_uploaded
-            })
-        )
+            if(!is_file_valid) throw new FileValidatorException()
 
-        files_uploaded.then(async (results : string[]) => {
-            console.log(results)
-            const entity: boolean = await this._repository.save(results, tableName, fid)
+            const file_uploaded : any = await this._file_uploader.upload(file)
 
-            if(!entity) throw new CreateEntityException()
-        })
-        
+            const newEntity : Entity = {
+                name: file_uploaded.file_name,
+                url: file_uploaded.file_path
+            }
 
-        return true
+            const entity: Entity | null = await this._repository.save(newEntity)
+
+            if(entity === null) throw new CreateEntityException()
+
+            return entity
+                
+        })        
+        return entities_response
     }
 }

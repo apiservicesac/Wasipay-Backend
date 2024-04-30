@@ -5,12 +5,10 @@ import e, { NextFunction, Request, Response } from "express"
 export const saveController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const images = req?.files?.images;
-        const { tableName, fid } = req.body;
-        console.log(tableName, fid)
-        
+
         const sequelizeRepository = new ImplementationSequelize()
         const useCase = new UseCase(sequelizeRepository)
-        const dataCreated = await useCase.run(images, tableName, fid)
+        const dataCreated = await useCase.run(images)
 
         res.status(201).json({
             status: 'created',

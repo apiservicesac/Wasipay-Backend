@@ -1,7 +1,6 @@
 import { FileEntity as Entity } from '@/file_uploader/domain/entities'
 import { FileUploadRepository as Repository } from '@/file_uploader/domain/repositories'
 import { FileSequelize as Sequelize } from '@/file_uploader/infrastructure/driven-adapter/sequelize'
-import { sequelize } from '@/shared/services/sequelize-conector';
 
 class ImplementationSequelize implements Repository {
 
@@ -11,20 +10,15 @@ class ImplementationSequelize implements Repository {
         return entities;
     }    
 
-    async save (urls: string[], tableName: string, fid: string): Promise<boolean> {
-        try{          
-            const urlsArray = urls.map(url => `'${url}'`).join(', ');
-
-            const updateQuery = `
-                UPDATE "${tableName}"
-                SET imagenes = ARRAY[${urlsArray}]
-                WHERE fid = ${fid};
-            `;
-
-            await sequelize.query(updateQuery);
-            return true
-        }catch(e) {            
-            return false
+    async save (data: Entity): Promise<Entity | null> {
+        try{
+            const newEntity = await Sequelize.create({
+                name: data.name,
+                url: data.url,
+            });
+            return newEntity.toJSON() as Entity;
+        }catch {
+            return null
         }
     }   
 

@@ -17,10 +17,12 @@ export class FileUploader {
     }
 
   async upload(file: any): Promise<Object> {
+
     mkdirSync(this.BASE_FILE_UPLOAD_PATH, { recursive: true });
     
     const fileName = sha1(Date.now().toString() + file.originalname);    
     let filePath = join(this.BASE_FILE_UPLOAD_PATH, `${fileName}.${file.mimetype.replace('image/', '')}`);        
+
     try{
       switch (file.mimetype) {
         case 'image/png':
@@ -38,8 +40,11 @@ export class FileUploader {
     }
     filePath = filePath.replace(
       process.env.PATH_FILES_UPLOAD!,
-      `${process.env.FILE_SERVER_UPLOADS}/uploads`,
+      '/public/uploads',
     );
-    return filePath
+    return {
+      file_name: fileName,
+      file_path: filePath
+    };
   }
 }
