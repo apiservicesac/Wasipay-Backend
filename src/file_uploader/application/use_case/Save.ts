@@ -32,25 +32,27 @@ export class SaveUseCase {
             request_files = [files!];
         }
         
-        const entities_response : any = request_files.map(async (file) => {
-            const is_file_valid = this._file_validator.run(file)
-
-            if(!is_file_valid) throw new FileValidatorException()
-
-            const file_uploaded : any = await this._file_uploader.upload(file)
-
-            const newEntity : Entity = {
-                name: file_uploaded.file_name,
-                url: file_uploaded.file_path
-            }
-
-            const entity: Entity | null = await this._repository.save(newEntity)
-
-            if(entity === null) throw new CreateEntityException()
-
-            return entity
-                
-        })        
+        const entities_response : any = await Promise.all(
+            request_files.map(async (file) => {
+                const is_file_valid = this._file_validator.run(file)
+    
+                if(!is_file_valid) throw new FileValidatorException()
+    
+                const file_uploaded : any = await this._file_uploader.upload(file)
+    
+                const newEntity : Entity = {
+                    name: file_uploaded.file_name,
+                    url: file_uploaded.file_path
+                }
+    
+                const entity: Entity | null = await this._repository.save(newEntity)
+    
+                if(entity === null) throw new CreateEntityException()
+    
+                return entity
+                    
+            })  
+        )      
         return entities_response
     }
 }
