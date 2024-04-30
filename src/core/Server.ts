@@ -5,6 +5,7 @@ import routes_v1 from './routes/v1'
 import { error } from 'console'
 import swaggerDocV1 from './swagger/swagger'
 import { logger,log4js } from '@/shared/utils/Logger'
+import fileUpload from 'express-fileupload'
 
 export class Server {
     
@@ -23,7 +24,11 @@ export class Server {
             optionsSuccessStatus: 200
         };
 
-        this._app.use(cors(corsOptions))    
+        this._app.use(cors(corsOptions)) 
+        
+        this._app.use(fileUpload({
+            limits: { fileSize: 50 * 1024 * 1024 },
+        }));
 
         this._app.use((_req : any, _res : any, next : any) => {
             next();
