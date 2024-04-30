@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction, Router } from "express"
 import { UserAlreadyExistsExceptions, UserNotFoundException, InsufficientRoleException, IncorrectPasswordException } from "../../../../domain/exceptions"
-import { ROUTES_USER } from "../../../../../core/infrastructure/driving-adapter/api-rest/routes/v1/const.routes"
 import routesUser from "./user.routes"
 import { logger } from "../../../../../shared/utils/Logger"
+import { ROUTES_USER } from "@/core/routes/v1/const.routes"
 
 const route = Router()
 
