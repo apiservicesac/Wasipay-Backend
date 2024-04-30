@@ -35,3 +35,10 @@ export const ROUTES_USER = {
     USER_UPDATE,
     USER_UPDATE_FIELD,
 }
+
+const FILE_SERVICE : string = '/file-service'
+const FILE_SAVE : string = '/upload'
+export const ROUTES_FILE_SERVICE = {
+    FILE_SERVICE,
+    FILE_SAVE
+}
