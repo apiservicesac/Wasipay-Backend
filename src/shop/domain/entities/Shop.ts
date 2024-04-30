@@ -2,7 +2,7 @@ export interface ShopEntity {
     id?: string;
     name?: string;
     description?: string;
-    logo_url?: string;    
+    image_id?: string;    
     address?: string;
     city?: string;
     country?: string;

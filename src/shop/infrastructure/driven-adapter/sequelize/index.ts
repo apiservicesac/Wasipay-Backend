@@ -21,7 +21,7 @@ ShopSequelize.init(
         description: {
             type: DataTypes.STRING,
         },
-        logo_url: {
+        image_id: {
             type: DataTypes.STRING,
         },
         address: {
