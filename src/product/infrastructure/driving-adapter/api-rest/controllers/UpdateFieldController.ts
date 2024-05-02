@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ProductEntity as Entity } from '@/product/domain/entities';
 import { UpdateFieldUseCase as UseCase } from '@/product/application/use_cases';
-import { ImplementationSequelize } from '@/shop/infrastructure/implementation/sequelize';
+import { ImplementationSequelize } from '@/product/infrastructure/implementation/sequelize';
 
 export const updateFieldController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
