@@ -18,6 +18,26 @@ export const ROUTES_SHOP = {
     SHOP_UPDATE_FIELD,
 }
 
+
+const PRODUCT : string = '/product'
+const PRODUCT_CREATE : string = '/create/:shop_id'
+const PRODUCT_GET_ALL : string = '/get-all/:shop_id'
+const PRODUCT_GET_BY_ID : string = '/get-by-id/:id'
+const PRODUCT_DELETE : string = '/delete/:id'
+const PRODUCT_UPDATE : string = '/update/:id'
+const PRODUCT_UPDATE_FIELD : string = '/update-field/:id'
+
+export const ROUTES_PRODUCT = {
+    PRODUCT,
+    PRODUCT_CREATE,
+    PRODUCT_GET_ALL,
+    PRODUCT_GET_BY_ID,
+    PRODUCT_DELETE,
+    PRODUCT_UPDATE,
+    PRODUCT_UPDATE_FIELD,
+}
+
+
 const USER : string = '/user'
 const USER_CREATE : string = '/create'
 const USER_GET_ALL : string = '/get-all'
