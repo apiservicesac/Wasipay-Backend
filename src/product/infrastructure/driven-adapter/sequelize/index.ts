@@ -40,7 +40,7 @@ ProductSequelize.init(
             type: DataTypes.STRING,
         },
         product_type: {
-            type: DataTypes.ENUM('OWNER', 'ADMIN', 'USER'),
+            type: DataTypes.ENUM('SINGLE', 'UNIT', 'BOX'),
         },
         status: {
             type: DataTypes.ENUM('AVAILABLE', 'SOLD_OUT', 'OUT_OF_STOCK'),
