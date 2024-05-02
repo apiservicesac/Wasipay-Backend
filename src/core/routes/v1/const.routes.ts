@@ -4,9 +4,9 @@ const SHOP : string = '/shop'
 const SHOP_CREATE : string = '/create'
 const SHOP_GET_ALL : string = '/get-all'
 const SHOP_GET_BY_ID : string = '/get-by-id/:id'
-const SHOP_DELETE : string = '/delete'
-const SHOP_UPDATE : string = '/update'
-const SHOP_UPDATE_FIELD : string = '/update-field'
+const SHOP_DELETE : string = '/delete/:id'
+const SHOP_UPDATE : string = '/update/:id'
+const SHOP_UPDATE_FIELD : string = '/update-field/:id'
 
 export const ROUTES_SHOP = {
     SHOP,

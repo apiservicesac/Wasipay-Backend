@@ -6,13 +6,13 @@ import { ImplementationSequelize } from '@/shop/infrastructure/implementacion/se
 
 export const updateFieldController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { id } = req.query;
+        const entityId = req.params.id;
 
         const { field, value } = req.body;
         
         const sequelizeRepository = new ImplementationSequelize()
         const useCase = new UseCase(sequelizeRepository)
-        const datUpdated = await useCase.run(id!.toString(), field, value)
+        const datUpdated = await useCase.run(entityId, field, value)
 
         res.status(200).json({
             status: 'updated',

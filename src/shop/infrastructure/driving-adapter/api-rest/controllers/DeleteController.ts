@@ -6,12 +6,12 @@ import { ImplementationSequelize } from '@/shop/infrastructure/implementacion/se
 export const deleteController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         
-        const { id } = req.query;
+        const entityId = req.params.id;
 
         const sequelizeRepository = new ImplementationSequelize()
         const useCase = new UseCase(sequelizeRepository)
         
-        await useCase.run(id!.toString())
+        await useCase.run(entityId)
 
         res.status(200).json({
             status: 'deleted',

@@ -6,13 +6,13 @@ import { ImplementationSequelize } from '@/shop/infrastructure/implementacion/se
 
 export const updateController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { id } = req.query;
+        const entityId = req.params.id;
         
         const { name, description, address, city, country, postal_code, email, phone, social_media, opening_hours } = req.body;
 
 
         const data : Entity = {
-            id: id?.toString(),
+            id: entityId,
             name,
             description,
             address,
