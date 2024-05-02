@@ -12,9 +12,9 @@ export const getByIdController = async (req: Request, res: Response, next: NextF
         const useCase = new UseCase(sequelizeRepository)
         const entity : Entity | null = await useCase.run(entityId)
 
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
-            code: 201,
+            code: 200,
             message: 'Registro Recuperado Correctamente',
             data: entity
 
