@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ProductEntity as Entity } from '@/product/domain/entities';
 import { GetAllUseCase as UseCase } from '@/product/application/use_cases';
-import { ImplementationSequelize } from '@/product/infrastructure/implementacion/sequelize';
+import { ImplementationSequelize } from '@/product/infrastructure/implementation/sequelize';
 
 export const getAllController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {

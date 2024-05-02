@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { DeleteUseCase as UseCase } from '@/product/application/use_cases';
-import { ImplementationSequelize } from '@/product/infrastructure/implementacion/sequelize';
+import { ImplementationSequelize } from '@/product/infrastructure/implementation/sequelize';
 
 export const deleteController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
