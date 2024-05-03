@@ -40,15 +40,17 @@ export const ROUTES_PRODUCT = {
 
 const USER : string = '/user'
 const USER_CREATE : string = '/create'
+const USER_LOGIN : string = '/login'
 const USER_GET_ALL : string = '/get-all'
 const USER_GET_BY_ID : string = '/get-by-id/:id'
-const USER_DELETE : string = '/delete'
-const USER_UPDATE : string = '/update'
-const USER_UPDATE_FIELD : string = '/update-field'
+const USER_DELETE : string = '/delete/:id'
+const USER_UPDATE : string = '/update/:id'
+const USER_UPDATE_FIELD : string = '/update-field/:id'
 
 export const ROUTES_USER = {
     USER,
     USER_CREATE,
+    USER_LOGIN,
     USER_GET_ALL,
     USER_GET_BY_ID,
     USER_DELETE,
