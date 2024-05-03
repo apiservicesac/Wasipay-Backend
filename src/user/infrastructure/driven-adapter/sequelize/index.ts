@@ -27,7 +27,8 @@ UserSequelize.init(
         },              
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         login_date: {
             type: DataTypes.DATE,
