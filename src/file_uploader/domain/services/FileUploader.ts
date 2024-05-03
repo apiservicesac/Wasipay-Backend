@@ -40,7 +40,7 @@ export class FileUploader {
     }
     filePath = filePath.replace(
       process.env.PATH_FILES_UPLOAD!,
-      '/public/uploads',
+      `${process.env.FILE_SERVER_UPLOADS!}/uploads`,
     );
     return {
       file_name: fileName,
