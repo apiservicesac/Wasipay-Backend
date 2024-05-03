@@ -10,6 +10,7 @@ export class UserEntity implements Interface {
     private _login_date?: Date;
     private _password?: string;
     private _role?: UserRole;
+    private _shop_id?: string;
     private _createdAt?: Date;
     private _updatedAt?: Date;
 
@@ -22,6 +23,7 @@ export class UserEntity implements Interface {
         this._login_date = data?.login_date;
         this._password = data?.password || '';
         this._role = data?.role! || '';
+        this._shop_id = data?.shop_id || '';
         this._createdAt = data?.createdAt;
         this._updatedAt = data?.updatedAt;
     }
@@ -88,6 +90,14 @@ export class UserEntity implements Interface {
 
     setRole(role: UserRole): void {
         this._role = role;
+    }
+
+    getShopId(): string | undefined {
+        return this._shop_id;
+    }
+
+    setShopId(shop_id: string): void {
+        this._shop_id = shop_id;
     }
 
     getCreatedAt(): Date | undefined {

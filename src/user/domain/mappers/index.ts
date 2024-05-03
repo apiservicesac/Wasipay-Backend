@@ -9,6 +9,7 @@ export class UserDtoMapper {
             email: entity.getEmail(),
             login_date: entity.getLoginDate(),
             password: entity.getPassword(),
+            shop_id: entity.getShopId(),
             role: 'USER',
         };
     }
@@ -22,6 +23,7 @@ export class UserDtoMapper {
             phone_number: entity.getPhoneNumber(),
             email: entity.getEmail(),
             login_date: entity.getLoginDate()?.toLocaleString('es-PE', options).toUpperCase(),
+            shop_id: entity.getShopId(),
             role: entity.getRole(),
         };
     }

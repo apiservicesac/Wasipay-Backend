@@ -37,6 +37,10 @@ UserSequelize.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        shop_id: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         role: {
             type: DataTypes.ENUM('ADMIN', 'USER'),
             allowNull: false

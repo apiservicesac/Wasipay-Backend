@@ -9,6 +9,7 @@ export interface UserInterface {
     login_date?: Date;
     password?: string;
     role?: UserRole;
+    shop_id?: string;
     createdAt?: Date;
     updatedAt?: Date;
     
@@ -35,6 +36,9 @@ export interface UserInterface {
     
     getRole(): UserRole | undefined;
     setRole(role: UserRole): void;
+
+    getShopId(): string | undefined;
+    setShopId(shop_id: string): void;
     
     getCreatedAt(): Date | undefined;
     setCreatedAt(createdAt: Date): void;
