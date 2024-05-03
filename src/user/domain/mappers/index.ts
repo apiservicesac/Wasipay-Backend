@@ -1,5 +1,4 @@
 import { UserEntity as Entity } from "../entities";
-import { UserInterface as Interface } from "../interface";
 
 export class UserDtoMapper {
     static toDto(entity: Entity): any {
