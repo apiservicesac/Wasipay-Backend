@@ -1,30 +1,21 @@
-import { User} from "../../domain/entities"
-import { UserRepository } from "../../domain/repositories"
-import { UserVerifyRoleAdmin, ExistUserByEmail } from "../../domain/services"
-import { UserNotFoundException, InsufficientRoleException } from "../../domain/exceptions"
+import { UserRepository as Repository } from "@/user/domain/repositories"
+import { DeleteEntityException } from "@/shared/exceptions"
 
-export class UserDeleteUseCase {
+export class DeleteUseCase {
 
-    private readonly _userRepository: UserRepository
-    private readonly _existUserByEmail: ExistUserByEmail
-    private readonly _currentUserIsAdmin : UserVerifyRoleAdmin
+    private readonly _repository: Repository
 
     constructor(
-        userRepository: UserRepository
+        repository: Repository
     ) {
-        this._userRepository = userRepository
-        this._currentUserIsAdmin = new UserVerifyRoleAdmin(userRepository)
-        this._existUserByEmail = new ExistUserByEmail(userRepository)
+        this._repository = repository
     }
 
-    async run(email: string): Promise<void> {
+    async run(id: string): Promise<void | null > {
+       
+        const deleted = await this._repository.delete(id)
 
-        const existUser = await this._existUserByEmail.run(email)
-
-        if (!existUser) throw new UserNotFoundException()
-        
-        await this._userRepository.delete(existUser)
+        if(deleted === null) throw new DeleteEntityException()
 
     }
-
 }

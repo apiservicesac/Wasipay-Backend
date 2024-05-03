@@ -1,8 +1,9 @@
+import { NotFoundEntityException } from "@/shared/exceptions"
 import { UserEntity as Entity } from "@/user/domain/entities"
 import { UserDtoMapper } from "@/user/domain/mappers"
 import { UserRepository as Repository } from "@/user/domain/repositories"
 
-export class GetAllUseCase {
+export class GetByIdUseCase {
 
     private readonly _repository: Repository
 
@@ -12,8 +13,9 @@ export class GetAllUseCase {
         this._repository = repository
     }
 
-    async run(): Promise<Entity[] | null > {
-        const entities: Entity[] | null = await this._repository.getAll()
-        return entities.map((entity) => UserDtoMapper.toJson(entity))
+    async run(id: string): Promise<Entity | null > {
+        const entity: Entity | null = await this._repository.getById(id)
+        if(entity === null) throw new NotFoundEntityException()
+        return UserDtoMapper.toJson(entity)
     }
 }

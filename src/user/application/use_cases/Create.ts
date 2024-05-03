@@ -1,32 +1,32 @@
 import { UserEntity as Entity } from "@/user/domain/entities"
-import { UserRepository } from "@/user/domain/repositories"
-import { UserAlreadyExistsExceptions } from "../../domain/exceptions"
-import { PasswordManager } from "@/shared/utils/PasswordManager"
+import { UserRepository as Repository } from "@/user/domain/repositories"
 import { CreateEntityException } from "@/shared/exceptions"
+import { PasswordManager } from "@/shared/utils/PasswordManager"
+import { UserDtoMapper } from "@/user/domain/mappers"
 
 export class CreateUseCase {
 
-    private readonly _userRepository: UserRepository
-    private readonly _encryptUserPassword: PasswordManager
+    private readonly _repository: Repository
+    private readonly _password_encrypt: PasswordManager
 
     constructor(
-        userRepository: UserRepository
+        repository: Repository
     ) {
-        this._userRepository = userRepository
-        this._encryptUserPassword = new PasswordManager()
+        this._repository = repository
+        this._password_encrypt = new PasswordManager()
     }
 
-    async run(data: Entity): Promise<any> {
-        const existUser = await this._userRepository.getByEmail(data.email!)
+    async run(data: Entity): Promise<Entity> {
+        const password_ecnrypt : string = await this._password_encrypt.hashPassword(data.getPassword()!)
 
-        if (existUser) throw new UserAlreadyExistsExceptions()        
-    
-        data.password = await this._encryptUserPassword.hashPassword(data.password!)
+        data.setPassword(password_ecnrypt)        
+        
+        const create_entity = UserDtoMapper.toDto(data)
 
-        const userCreated: Entity | null = await this._userRepository.save(data)
-        
-        if (!userCreated) throw new CreateEntityException()
-        
-        return userCreated;
+        const entity: Entity | null = await this._repository.save(create_entity)
+
+        if(entity === null) throw new CreateEntityException()
+
+        return UserDtoMapper.toJson(entity)
     }
 }

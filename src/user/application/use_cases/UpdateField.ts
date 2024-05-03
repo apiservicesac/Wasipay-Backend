@@ -3,7 +3,7 @@ import { UserRepository as Repository } from "@/user/domain/repositories"
 import { UpdateEntityException } from "@/shared/exceptions"
 import { UserDtoMapper } from "@/user/domain/mappers"
 
-export class UpdateUseCase {
+export class UpdateFieldUseCase {
 
     private readonly _repository: Repository
 
@@ -13,9 +13,9 @@ export class UpdateUseCase {
         this._repository = repository
     }
 
-    async run(id: string, data: Entity): Promise<Entity> {
+    async run(id : string, field : string, value : any): Promise<Entity> {
        
-        const entity: Entity | null = await this._repository.update(id, data)
+        const entity: Entity | null = await this._repository.update_field(id, field, value)
 
         if(entity === null) throw new UpdateEntityException()
         

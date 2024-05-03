@@ -1,39 +1,45 @@
-import { User } from "../../domain/entities"
-import { UserRepository } from "../../domain/repositories"
-import { ExistUserByEmail } from "../../domain/services"
-import { UserNotFoundException, IncorrectPasswordException } from "../../domain/exceptions"
-import { TokenManager } from "../../../shared/utils/TokenManager"
-import { PasswordManager } from "../../../shared/utils/PasswordManager"
+import { UserEntity as Entity } from "@/user/domain/entities"
+import { UserRepository as Repository } from "@/user/domain/repositories"
+import { AuthenticateException } from "@/shared/exceptions"
+import { PasswordManager } from "@/shared/utils/PasswordManager"
+import { TokenManager } from "@/shared/utils/TokenManager"
+import { UserResponse as Response } from "@/user/domain/entities"
+import { UserDtoMapper } from "@/user/domain/mappers"
 
-export class UserLoginUseCase {
-    private readonly _existUserByEmail : ExistUserByEmail
-    private readonly _checkPassword : PasswordManager
-    private readonly _tokenGenerator: TokenManager
+export class LoginUseCase {
 
-    constructor (userRepository : UserRepository) {
-        this._existUserByEmail = new ExistUserByEmail(userRepository)
-        this._checkPassword = new PasswordManager()
-        this._tokenGenerator = new TokenManager()
+    private readonly _repository: Repository
+    private readonly _password_manager: PasswordManager
+    private readonly _token_manager: TokenManager
+
+    constructor(
+        repository: Repository
+    ) {
+        this._repository = repository
+        this._password_manager = new PasswordManager(),
+        this._token_manager = new TokenManager()
     }
 
-    async run (userLogin : User ): Promise<any> {
+    async run(email: string, password: string): Promise<Response<Entity>> {
 
-        const user = await this._existUserByEmail.run(userLogin.email!)
+        const user = await this._repository.getByEmail(email)
         
-        if (!user) throw new UserNotFoundException()
+        if (user === null ) throw new AuthenticateException()
 
-        const isValidPassord = await this._checkPassword.comparePasswords(userLogin.password!, user?.password!)
+        const isValidPassord = await this._password_manager.comparePasswords(password, user.getPassword()!)        
 
-        if (!isValidPassord) throw new IncorrectPasswordException()
+        const user_update_login_date = await this._repository.update_field(user.getId()!, 'login_date', new Date().toLocaleString())
 
-        const accessToken = this._tokenGenerator.generateToken(user)
-        const refreshToken = this._tokenGenerator.generateRefreshToken(user)
+        if (user_update_login_date === null) throw new AuthenticateException()
+
+        if (!isValidPassord) throw new AuthenticateException()
+        
+        const user_mapped = UserDtoMapper.toJson(user_update_login_date)
 
         return {
-            accessToken,
-            refreshToken,
-            user
+            user: user_mapped,
+            access_token: this._token_manager.generateAccessToken(user_mapped),
+            refresh_token: this._token_manager.generateRefreshToken(user_mapped),
         }
     }
-
 }

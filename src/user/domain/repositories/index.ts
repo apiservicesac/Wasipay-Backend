@@ -1,5 +1,4 @@
-import { UserRepository } from "./User"
-
+import { UserRepository } from './User'
 
 export {
     UserRepository
