@@ -41,7 +41,7 @@ class ImplementationSequelize implements Repository {
     }   
     
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
-        const [affectedCount, updatedEntities] = await Sequelize.update({[field] : value }, { where: { id }, returning: true });        
+        const [affectedCount, updatedEntities] = await Sequelize.update({[field] : value }, { where: { id }, returning: true, });        
         if (affectedCount > 0 && updatedEntities.length > 0) {
             return updatedEntities[0].toJSON() as Entity;
         }

@@ -2,6 +2,7 @@ import { sequelize } from '@/shared/services/sequelize-conector/index'
 import dotenv from 'dotenv'
 import { DataTypes, Model } from 'sequelize';
 import { loggerDataBase } from '@/shared/utils/Logger';
+import { FileSequelize } from '@/file_uploader/infrastructure/driven-adapter/sequelize';
 
 dotenv.config()
 
@@ -20,9 +21,6 @@ ShopSequelize.init(
             unique: true
         },
         description: {
-            type: DataTypes.STRING,
-        },
-        image_id: {
             type: DataTypes.STRING,
         },
         address: {

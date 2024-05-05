@@ -2,7 +2,6 @@ import { sequelize } from '@/shared/services/sequelize-conector/index'
 import dotenv from 'dotenv'
 import { DataTypes, Model } from 'sequelize';
 import { loggerDataBase } from '@/shared/utils/Logger';
-import { ProductState } from '@/product/domain/enums';
 
 dotenv.config()
 
