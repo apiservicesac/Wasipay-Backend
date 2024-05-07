@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mongo-redshop:
+    container_name: mongo-redshop
+    image: mongo:latest
+    hostname: host-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /opt/mongo_redshop/data:/data/db
+      - /opt/mongo_redshop/log:/var/log/mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: redshop
+      MONGO_INITDB_ROOT_PASSWORD: redshop
+    networks:
+      redshop_backend:
+        ipv4_address: 37.60.239.90
+
+networks:
+  redshop_backend:
+    ipam:
+      config:
+        - subnet: 37.60.239.80/28
