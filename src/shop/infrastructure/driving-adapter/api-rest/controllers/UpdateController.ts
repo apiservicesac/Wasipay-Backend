@@ -12,7 +12,6 @@ export const updateController = async (req: Request, res: Response, next: NextFu
 
 
         const data : Entity = {
-            id: entityId,
             name,
             description,
             address,
@@ -26,7 +25,7 @@ export const updateController = async (req: Request, res: Response, next: NextFu
         
         const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
-        const datUpdated = await useCase.run(data)
+        const datUpdated = await useCase.run(entityId, data)
 
         res.status(200).json({
             status: 'updated',

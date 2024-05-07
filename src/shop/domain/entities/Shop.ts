@@ -9,6 +9,7 @@ export interface ShopEntity {
     postal_code?: string;
     email?: string;
     phone?: string;
+    file?: string;
     social_media?: {
         facebook?: string;
         tiktok?: string;

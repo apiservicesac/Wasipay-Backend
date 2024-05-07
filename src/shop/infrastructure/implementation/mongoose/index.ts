@@ -6,7 +6,7 @@ class ImplementationMongoose implements Repository {
 
     async getAll(): Promise<Entity[]> {
         const result = await Mongoose.find().populate("file");
-        const entities: Entity[] = result.map((shop: any) => shop.toJSON() as Entity);
+        const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
         return entities;
     }   
 
@@ -29,9 +29,9 @@ class ImplementationMongoose implements Repository {
         }
     }   
 
-    async update(data: Entity): Promise<Entity | null> {
+    async update(id: string, data: Entity): Promise<Entity | null> {
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: data.id }, data, { new: true });
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true });
             
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
@@ -65,7 +65,7 @@ class ImplementationMongoose implements Repository {
 
     async getById(id: string): Promise<Entity | null> {
         try {
-            const foundEntity = await Mongoose.findOne({ _id: id }).populate("files");
+            const foundEntity = await Mongoose.findOne({ _id: id }).populate("file");
         
             if (!foundEntity) return null;
         
