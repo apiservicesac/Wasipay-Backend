@@ -8,16 +8,34 @@ const ShopSchema = new conector_mongoose.Schema({
         required: true,
         unique: true
     },
-    description: String,
-    address: String,
-    city: String,
-    country: String,
-    postal_code: String,
-    email: String,
-    phone: String,
+    description: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    country: {
+        type: String,
+    },
+    postal_code: {
+        type: String,
+    },
+    email: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
     social_media: {
         type: Map,
         of: String
+    },
+    file: {
+        type: conector_mongoose.Types.ObjectId, 
+        ref: "File",
     },
 }, { timestamps: true });
 

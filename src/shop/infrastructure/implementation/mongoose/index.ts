@@ -5,7 +5,7 @@ import { ShopMongoose as Mongoose } from '@/shop/infrastructure/driven-adapter/m
 class ImplementationMongoose implements Repository {
 
     async getAll(): Promise<Entity[]> {
-        const result = await Mongoose.find();
+        const result = await Mongoose.find().populate("file");
         const entities: Entity[] = result.map((shop: any) => shop.toJSON() as Entity);
         return entities;
     }   
@@ -44,13 +44,13 @@ class ImplementationMongoose implements Repository {
     
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true });
-            
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true });            
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
             }        
             return null;
         } catch (error) {
+            console.log(error);            
             return null;
         }
     }   
@@ -65,7 +65,7 @@ class ImplementationMongoose implements Repository {
 
     async getById(id: string): Promise<Entity | null> {
         try {
-            const foundEntity = await Mongoose.findOne({ _id: id });
+            const foundEntity = await Mongoose.findOne({ _id: id }).populate("files");
         
             if (!foundEntity) return null;
         
