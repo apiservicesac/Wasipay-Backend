@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ProductEntity as Entity } from '@/product/domain/entities';
 import { UpdateUseCase as UseCase } from '@/product/application/use_cases';
-import { ImplementationSequelize } from '@/product/infrastructure/implementation/sequelize';
+import { ImplementationMongoose } from '@/product/infrastructure/implementation/mongoose';
 
 export const updateController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -12,13 +12,12 @@ export const updateController = async (req: Request, res: Response, next: NextFu
 
 
         const data : Entity = {
-            ...body_data,
-            id: entityId,            
+            ...body_data,           
         }
         
-        const sequelizeRepository = new ImplementationSequelize()
-        const useCase = new UseCase(sequelizeRepository)
-        const datUpdated = await useCase.run(data)
+        const mongooseRepository = new ImplementationMongoose()
+        const useCase = new UseCase(mongooseRepository)
+        const datUpdated = await useCase.run(entityId, data)
 
         res.status(200).json({
             status: 'updated',

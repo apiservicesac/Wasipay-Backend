@@ -2,14 +2,14 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ProductEntity as Entity } from '@/product/domain/entities';
 import { GetAllUseCase as UseCase } from '@/product/application/use_cases';
-import { ImplementationSequelize } from '@/product/infrastructure/implementation/sequelize';
+import { ImplementationMongoose } from '@/product/infrastructure/implementation/mongoose';
 
 export const getAllController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const shopId = req.params.shop_id;
 
-        const sequelizeRepository = new ImplementationSequelize()
-        const useCase = new UseCase(sequelizeRepository)
+        const mongooseRepository = new ImplementationMongoose()
+        const useCase = new UseCase(mongooseRepository)
         const entities : Entity[] | null = await useCase.run(shopId)
 
         res.status(200).json({

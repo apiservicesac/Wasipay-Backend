@@ -9,7 +9,8 @@ export interface ProductEntity {
     brand?: string;
     product_category?: string;
     product_type?: ProductType;
-    shop_id?: string;
+    shop?: string;
+    file?: string[];
     status?: ProductState;
     visibility?: ProductVisibility;
     createdAt?: Date;
