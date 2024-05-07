@@ -6,7 +6,7 @@ class ImplementationMongoose implements Repository {
 
     async getAll(): Promise<Entity[]> {
         const result = await Mongoose.find();
-        const entities: Entity[] = result.map((shop: any) => shop.toJSON() as Entity);
+        const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
         return entities;
     }   
 
