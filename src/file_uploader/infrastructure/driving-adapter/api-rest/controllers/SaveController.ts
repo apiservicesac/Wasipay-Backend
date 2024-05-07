@@ -1,13 +1,13 @@
 import { SaveUseCase as UseCase } from "@/file_uploader/application/use_case";
-import { ImplementationSequelize } from "@/file_uploader/infrastructure/implementation/sequelize";
-import e, { NextFunction, Request, Response } from "express"
+import { ImplementationMongoose } from "@/file_uploader/infrastructure/implementation/mongoose";
+import { NextFunction, Request, Response } from "express"
 
 export const saveController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const images = req?.files?.images;
 
-        const sequelizeRepository = new ImplementationSequelize()
-        const useCase = new UseCase(sequelizeRepository)
+        const mongooseRepository = new ImplementationMongoose()
+        const useCase = new UseCase(mongooseRepository)
         const dataCreated = await useCase.run(images)
 
         res.status(201).json({
