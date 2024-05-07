@@ -21,8 +21,7 @@ class ImplementationSequelize implements Repository {
                 postal_code: data.postal_code,
                 email: data.email,
                 phone: data.phone,
-                social_media: data.social_media,
-                opening_hour: data.opening_hours
+                social_media: data.social_media                
             });
             return newEntity.toJSON() as Entity;
         }catch {

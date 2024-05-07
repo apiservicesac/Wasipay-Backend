@@ -44,9 +44,6 @@ ShopSequelize.init(
         social_media: {
             type: DataTypes.JSONB,
         },
-        opening_hours: {
-            type: DataTypes.JSONB,
-        },
     },
     {
         sequelize,

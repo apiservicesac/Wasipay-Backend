@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { UpdateFieldUseCase as UseCase } from '@/shop/application/use_cases';
-import { ImplementationSequelize } from '@/shop/infrastructure/implementation/sequelize';
+import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
 
 export const updateFieldController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -9,8 +9,8 @@ export const updateFieldController = async (req: Request, res: Response, next: N
 
         const { field, value } = req.body;
         
-        const sequelizeRepository = new ImplementationSequelize()
-        const useCase = new UseCase(sequelizeRepository)
+        const mongooseRepository = new ImplementationMongoose()
+        const useCase = new UseCase(mongooseRepository)
         const datUpdated = await useCase.run(entityId, field, value)
 
         res.status(200).json({

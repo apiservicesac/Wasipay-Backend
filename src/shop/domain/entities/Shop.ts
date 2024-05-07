@@ -16,15 +16,6 @@ export interface ShopEntity {
         youtube?: string;
         whatsapp?: string;
     };
-    opening_hours?: {
-        monday?: string;
-        tuesday?: string;
-        wednesday?: string;
-        thursday?: string;
-        friday?: string;
-        saturday?: string;
-        sunday?: string;
-    };
     createdAt?: Date;
     updatedAt?: Date;
 }

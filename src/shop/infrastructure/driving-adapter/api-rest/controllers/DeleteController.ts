@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { DeleteUseCase as UseCase } from '@/shop/application/use_cases';
-import { ImplementationSequelize } from '@/shop/infrastructure/implementation/sequelize';
+import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
 
 export const deleteController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         
         const entityId = req.params.id;
 
-        const sequelizeRepository = new ImplementationSequelize()
-        const useCase = new UseCase(sequelizeRepository)
+        const mongooseRepository = new ImplementationMongoose()
+        const useCase = new UseCase(mongooseRepository)
         
         await useCase.run(entityId)
 
