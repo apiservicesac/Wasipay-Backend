@@ -3,7 +3,9 @@ import { ProductState, ProductType, ProductVisibility } from "../enums";
 export interface ProductEntity {
     id?: string;
     name?: string;  
-    description?: string;  
+    description?: string;
+    price?: number;
+    discount?: number;
     quantity?: number;
     sku?: string;
     brand?: string;

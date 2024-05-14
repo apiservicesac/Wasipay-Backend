@@ -12,6 +12,12 @@ const ProductSchema = new conector_mongoose.Schema({
     quantity: { 
         type: Number, required: true 
     },
+    price: { 
+        type: Number, required: true 
+    },
+    discount: { 
+        type: Number,        
+    },
     sku: { 
         type: String 
     },

@@ -12,6 +12,7 @@ class ImplementationMongoose implements Repository {
 
     async save (data: Entity): Promise<Entity | null> {
         try{
+            console.log(data)
             const newEntity = await Mongoose.create({
                 ...data
             });
