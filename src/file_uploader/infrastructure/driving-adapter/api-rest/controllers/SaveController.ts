@@ -5,10 +5,11 @@ import { NextFunction, Request, Response } from "express"
 export const saveController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const images = req?.files?.images;
+        const { type, id } = req?.body
 
         const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
-        const dataCreated = await useCase.run(images)
+        const dataCreated = await useCase.run(type, id, images)
 
         res.status(201).json({
             status: 'created',
