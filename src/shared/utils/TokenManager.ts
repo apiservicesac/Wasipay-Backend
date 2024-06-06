@@ -10,7 +10,7 @@ export class TokenManager {
 
     public generateAccessToken(payload: any): string {        
         return jwt.sign(
-            {...payload, type: 'access'},        
+            {id: payload, type: 'access'},        
             this.secretKey,
             { expiresIn: ms(3600000) }
         );
@@ -18,7 +18,7 @@ export class TokenManager {
 
     public generateRefreshToken(payload: any): string {        
         return jwt.sign(
-            {...payload, type: 'refresh'},
+            {id: payload, type: 'refresh'},
             this.secretKey,
             { expiresIn: ms(3600000 * 24) }
         );
