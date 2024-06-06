@@ -26,20 +26,16 @@ export class LoginUseCase {
         
         if (user === null ) throw new AuthenticateException()
 
-        const isValidPassord = await this._password_manager.comparePasswords(password, user.getPassword()!)        
-
-        const user_update_login_date = await this._repository.update_field(user.getId()!, 'login_date', new Date().toLocaleString())
-
-        if (user_update_login_date === null) throw new AuthenticateException()
+        const isValidPassord = await this._password_manager.comparePasswords(password, user.password!)        
 
         if (!isValidPassord) throw new AuthenticateException()
         
-        const user_mapped = UserDtoMapper.toJson(user_update_login_date)
+        const user_mapped = UserDtoMapper.toJson(user)
 
         return {
             user: user_mapped,
-            access_token: this._token_manager.generateAccessToken(user_mapped),
-            refresh_token: this._token_manager.generateRefreshToken(user_mapped),
+            access_token: this._token_manager.generateAccessToken(user._id),
+            refresh_token: this._token_manager.generateRefreshToken(user._id),
         }
     }
 }

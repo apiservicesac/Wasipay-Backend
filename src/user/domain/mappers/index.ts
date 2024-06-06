@@ -1,35 +1,16 @@
 import { UserEntity as Entity } from "../entities";
 
 export class UserDtoMapper {
-    static toDto(entity: Entity): any {
-        return {
-            first_name: entity.getFirstName(),
-            last_name: entity.getLastName(),
-            phone_number: entity.getPhoneNumber(),
-            email: entity.getEmail(),
-            login_date: entity.getLoginDate(),
-            password: entity.getPassword(),
-            shop_id: entity.getShopId(),
-            role: 'USER',
-        };
-    }
 
     static toJson(entity: Entity): any {
-        const options : any = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
         return {
-            id: entity.getId(),
-            first_name: entity.getFirstName(),
-            last_name: entity.getLastName(),
-            phone_number: entity.getPhoneNumber(),
-            email: entity.getEmail(),
-            login_date: entity.getLoginDate()?.toLocaleString('es-PE', options).toUpperCase(),
-            shop_id: entity.getShopId(),
-            role: entity.getRole(),
+            id: entity._id,
+            first_name: entity.first_name,
+            last_name: entity.last_name,
+            phone_number: entity.phone_number,
+            email: entity.email,
+            shop_id: entity.shop_id,
+            role: entity.role,
         };
-    }
-
-    static fromDto(dto: Entity): Entity {        
-        const entity: Entity = new Entity({...dto});       
-        return entity;
     }
 }

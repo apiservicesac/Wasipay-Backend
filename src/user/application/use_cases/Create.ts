@@ -17,13 +17,12 @@ export class CreateUseCase {
     }
 
     async run(data: Entity): Promise<Entity> {
-        const password_ecnrypt : string = await this._password_encrypt.hashPassword(data.getPassword()!)
-
-        data.setPassword(password_ecnrypt)        
+        const password_ecnrypt : string = await this._password_encrypt.hashPassword(data.password!)
+        console.log(password_ecnrypt);
         
-        const create_entity = UserDtoMapper.toDto(data)
+        data.password = password_ecnrypt
 
-        const entity: Entity | null = await this._repository.save(create_entity)
+        const entity: Entity | null = await this._repository.save(data)
 
         if(entity === null) throw new CreateEntityException()
 
