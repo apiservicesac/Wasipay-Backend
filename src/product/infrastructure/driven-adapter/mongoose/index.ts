@@ -24,7 +24,7 @@ const ProductSchema = new conector_mongoose.Schema({
     brand: { 
         type: String 
     },
-    shop: {
+    shop_id: {
         type: conector_mongoose.Types.ObjectId, 
         ref: "Shop",
     },
@@ -38,9 +38,9 @@ const ProductSchema = new conector_mongoose.Schema({
         type: String, enum: ['AVAILABLE', 'SOLD_OUT', 'OUT_OF_STOCK'], required: true 
     },
     visibility: { 
-        type: String, enum: ['PUBLISHED', 'SCHEDULED', 'HIDDEN'], required: true },  
-
-    file: [
+        type: String, enum: ['PUBLISHED', 'SCHEDULED', 'HIDDEN'], required: true 
+    },  
+    file_ids: [
         {
             type: conector_mongoose.Types.ObjectId, 
             ref: "File",

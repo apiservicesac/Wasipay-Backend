@@ -6,13 +6,13 @@ import { ImplementationMongoose } from '@/product/infrastructure/implementation/
 
 export const createController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const shopId = req.params.shop_id;
+        const shop_id = req.params.shop_id;
 
         const body_data = req.body;
 
         const data : Entity = {
             ...body_data,
-            shop: shopId,
+            shop_id: shop_id,
         }
         
         const mongooseRepository = new ImplementationMongoose()

@@ -6,11 +6,11 @@ import { ImplementationMongoose } from '@/product/infrastructure/implementation/
 
 export const getAllController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const shopId = req.params.shop_id;
+        const shop_id = req.params.shop_id;
 
         const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
-        const entities : Entity[] | null = await useCase.run(shopId)
+        const entities : Entity[] | null = await useCase.run(shop_id)
 
         res.status(200).json({
             status: 'success',

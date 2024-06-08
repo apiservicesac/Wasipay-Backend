@@ -4,15 +4,14 @@ import { ProductMongoose as Mongoose } from '@/product/infrastructure/driven-ada
 
 class ImplementationMongoose implements Repository {
 
-    async getAll(): Promise<Entity[]> {
-        const result = await Mongoose.find().populate("file");
+    async getAll(shop_id: string): Promise<Entity[]> {
+        const result = await Mongoose.find({ shop_id: shop_id }).populate("file");
         const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
         return entities;
     }   
 
     async save (data: Entity): Promise<Entity | null> {
         try{
-            console.log(data)
             const newEntity = await Mongoose.create({
                 ...data
             });

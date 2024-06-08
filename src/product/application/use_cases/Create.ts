@@ -1,4 +1,5 @@
 import { ProductEntity as Entity } from "@/product/domain/entities"
+import { ProductDtoMapper } from "@/product/domain/mappers"
 import { ProductRepository as Repository } from "@/product/domain/repositories"
 import { CreateEntityException } from "@/shared/exceptions"
 
@@ -18,6 +19,6 @@ export class CreateUseCase {
 
         if(entity === null) throw new CreateEntityException()
         
-        return entity
+        return ProductDtoMapper.toJson(entity)
     }
 }
