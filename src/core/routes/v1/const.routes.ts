@@ -76,9 +76,11 @@ export const ROUTES_USER = {
     USER_UPDATE_FIELD,
 }
 
-const FILE_SERVICE : string = '/file-service'
-const FILE_SAVE : string = '/upload'
-export const ROUTES_FILE_SERVICE = {
-    FILE_SERVICE,
-    FILE_SAVE
+const IMAGE_SERVICE : string = '/image'
+const IMAGE_SAVE : string = '/upload'
+const IMAGE_DELETE : string = '/delete'
+export const ROUTES_IMAGE_SERVICE = {
+    IMAGE_SERVICE,
+    IMAGE_SAVE,
+    IMAGE_DELETE
 }
