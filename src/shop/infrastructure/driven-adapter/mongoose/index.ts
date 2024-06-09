@@ -1,5 +1,4 @@
 import { mongoose as conector_mongoose } from '@/shared/services/mongo-connector'
-import { v4 as uuidv4 } from 'uuid';
 
 const ShopSchema = new conector_mongoose.Schema({
 
@@ -33,9 +32,9 @@ const ShopSchema = new conector_mongoose.Schema({
         type: Map,
         of: String
     },
-    file: {
+    image: {
         type: conector_mongoose.Types.ObjectId, 
-        ref: "File",
+        ref: "Image",
     },
 }, { timestamps: true });
 

@@ -1,3 +1,5 @@
+import { ImageEntity } from "@/image_uploader/domain/entities";
+
 export interface ShopEntity {
     id?: string;
     name?: string;
@@ -9,7 +11,7 @@ export interface ShopEntity {
     postal_code?: string;
     email?: string;
     phone?: string;
-    file?: string;
+    image?: ImageEntity;
     social_media?: {
         facebook?: string;
         tiktok?: string;
