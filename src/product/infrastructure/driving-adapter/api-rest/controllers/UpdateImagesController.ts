@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { ProductEntity as Entity } from '@/product/domain/entities';
-import { AddImagesdUseCase, DeleteImagesdUseCase } from '@/product/application/use_cases';
+import { AddImagesdUseCase, DeleteImagesdUseCase, GetByIdUseCase } from '@/product/application/use_cases';
 import { ImplementationMongoose } from '@/product/infrastructure/implementation/mongoose';
 
 import { SaveImageUseCase, RemoveImageUseCase } from '@/image_uploader/application/use_case';
@@ -19,6 +19,10 @@ export const updateImagesController = async (req: Request, res: Response, next: 
         
         const mongooseImageUploaderRepository = new ImplementationImageUploader()
         const mongooseRepository = new ImplementationMongoose()
+
+        // Find Product Exist
+        const findEntity = new GetByIdUseCase(mongooseRepository)        
+        await findEntity.run(product_id)
 
         const delete_ids : string[] | null = image_delete_ids ? JSON.parse(image_delete_ids) : null
         
