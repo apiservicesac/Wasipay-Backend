@@ -3,6 +3,8 @@ import { ProductEntity as Entity } from '../entities'
 export interface ProductRepository {
     getAll: (shop_id: string) => Promise<Entity[]>
     getById: (id: string) => Promise<Entity | null>
+    getNextCode: (shop_id: string) => Promise<string | null>
+
     
     save: (entity: Entity) => Promise<Entity | null>
     update: (id: string, entity: Entity) => Promise<Entity | null>

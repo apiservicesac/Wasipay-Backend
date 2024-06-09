@@ -25,6 +25,7 @@ const PRODUCT : string = '/product'
 const PRODUCT_CREATE : string = '/create/:shop_id'
 const PRODUCT_GET_ALL : string = '/get-all/:shop_id'
 const PRODUCT_GET_BY_ID : string = '/get-by-id/:id'
+const PRODUCT_GET_NEXT_CODE : string = '/get-next-code/:shop_id'
 const PRODUCT_DELETE : string = '/delete/:id'
 const PRODUCT_UPDATE : string = '/update/:id'
 const PRODUCT_UPDATE_IMAGES : string = '/update-images/:id'
@@ -35,6 +36,7 @@ export const ROUTES_PRODUCT = {
     PRODUCT_CREATE,
     PRODUCT_GET_ALL,
     PRODUCT_GET_BY_ID,
+    PRODUCT_GET_NEXT_CODE,
     PRODUCT_DELETE,
     PRODUCT_UPDATE,
     PRODUCT_UPDATE_IMAGES,

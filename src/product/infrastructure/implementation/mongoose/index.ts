@@ -23,6 +23,36 @@ class ImplementationMongoose implements Repository {
 
     }
 
+    async getNextCode(shop_id: string): Promise<string | null> {
+        try {
+            const prefix = 'PROD';
+            const date = new Date();
+            const dayMonth = `${String(date.getDate()).padStart(2, '0')}${String(date.getMonth() + 1).padStart(2, '0')}`;
+            
+
+            const lastProduct = await Mongoose.findOne({ shop_id: shop_id, code_product: { $regex: `^${prefix}-${dayMonth}-` } })
+                                             .sort({ code_product: -1 })
+                                             .exec();
+            
+            let nextCode;
+
+            if (lastProduct) {
+                const entity = lastProduct.toJSON() as Entity
+                const lastCode = entity.code_product!;
+                const lastSequence = parseInt(lastCode.split('-')[2], 10);
+                const nextSequence = String(lastSequence + 1).padStart(3, '0');
+                nextCode = `${prefix}-${dayMonth}-${nextSequence}`;
+            } else {
+                nextCode = `${prefix}-${dayMonth}-001`;
+            }
+        
+            return nextCode;
+        }catch(e) {
+            return null
+        }
+
+    }
+
     async save (data: Entity): Promise<Entity | null> {
         try{
             const newEntity = await Mongoose.create({

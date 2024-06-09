@@ -6,6 +6,7 @@ import { UpdateUseCase } from './Update'
 import { UpdateFieldUseCase } from './UpdateField'
 import { AddImagesdUseCase } from './AddImages'
 import { DeleteImagesdUseCase } from './DeleteImages'
+import { GetNextCodeUseCase } from './GetNextCode'
 
 export {
     CreateUseCase,
@@ -16,4 +17,5 @@ export {
     UpdateFieldUseCase,
     AddImagesdUseCase,
     DeleteImagesdUseCase,
+    GetNextCodeUseCase,
 }
