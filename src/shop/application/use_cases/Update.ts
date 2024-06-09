@@ -1,6 +1,7 @@
 import { ShopEntity as Entity } from "@/shop/domain/entities"
 import { ShopRepository as Repository } from "@/shop/domain/repositories"
 import { UpdateEntityException } from "@/shared/exceptions"
+import { ShopDtoMapper } from "@/shop/domain/mappers"
 
 export class UpdateUseCase {
 
@@ -18,6 +19,6 @@ export class UpdateUseCase {
 
         if(entity === null) throw new UpdateEntityException()
         
-        return entity
+        return ShopDtoMapper.toJson(entity)
     }
 }

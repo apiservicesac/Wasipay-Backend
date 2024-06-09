@@ -1,6 +1,7 @@
 import { ShopEntity as Entity } from "@/shop/domain/entities"
 import { ShopRepository as Repository } from "@/shop/domain/repositories"
 import { UpdateEntityException } from "@/shared/exceptions"
+import { ShopDtoMapper } from "@/shop/domain/mappers"
 
 export class UpdateImageUseCase {
 
@@ -15,9 +16,9 @@ export class UpdateImageUseCase {
     async run(shop_id: string, image_id: string): Promise<Entity> {
        
         const entity: Entity | null = await this._repository.update_image(shop_id, image_id)
-
+        
         if(entity === null) throw new UpdateEntityException()
         
-        return entity
+        return ShopDtoMapper.toJson(entity)
     }
 }

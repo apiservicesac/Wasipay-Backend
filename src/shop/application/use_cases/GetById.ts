@@ -1,4 +1,6 @@
+import { NotFoundEntityException } from '@/shared/exceptions'
 import { ShopEntity as Entity } from '@/shop/domain/entities'
+import { ShopDtoMapper } from '@/shop/domain/mappers'
 import { ShopRepository as Repository } from '@/shop/domain/repositories'
 
 export class GetByIdUseCase {
@@ -13,6 +15,9 @@ export class GetByIdUseCase {
 
     async run(id: string): Promise<Entity | null > {
         const entity: Entity | null = await this._repository.getById(id)
-        return entity
+
+        if(!entity) throw new NotFoundEntityException()
+
+        return ShopDtoMapper.toJson(entity)
     }
 }

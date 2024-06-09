@@ -22,7 +22,7 @@ export const updateImageController = async (req: Request, res: Response, next: N
         
         
         const mongooseRepository = new ImplementationMongoose()
-        const useCase = new UpdateImageUseCase(mongooseRepository)
+        const useCase = new UpdateImageUseCase(mongooseRepository)        
         const datUpdated = await useCase.run(shop_id, images_entities[0]._id!)
 
         res.status(200).json({

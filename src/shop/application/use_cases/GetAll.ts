@@ -1,4 +1,5 @@
 import { ShopEntity as Entity } from '@/shop/domain/entities'
+import { ShopDtoMapper } from '@/shop/domain/mappers'
 import { ShopRepository as Repository } from '@/shop/domain/repositories'
 
 export class GetAllUseCase {
@@ -13,6 +14,6 @@ export class GetAllUseCase {
 
     async run(): Promise<Entity[] | null > {
         const entities: Entity[] | null = await this._repository.getAll()
-        return entities
+        return entities.map((entity) => ShopDtoMapper.toJson(entity))
     }
 }

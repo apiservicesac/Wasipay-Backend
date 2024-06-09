@@ -1,10 +1,9 @@
 import { ImageEntity } from "@/image_uploader/domain/entities";
 
 export interface ShopEntity {
-    id?: string;
+    _id?: string;
     name?: string;
-    description?: string;
-    image_id?: string;    
+    description?: string;   
     address?: string;
     city?: string;
     country?: string;
