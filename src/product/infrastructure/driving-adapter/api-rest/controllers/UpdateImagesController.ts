@@ -4,7 +4,7 @@ import { ProductEntity as Entity } from '@/product/domain/entities';
 import { AddImagesdUseCase, DeleteImagesdUseCase } from '@/product/application/use_cases';
 import { ImplementationMongoose } from '@/product/infrastructure/implementation/mongoose';
 
-import { SaveImageUseCase, DeleteUseCase } from '@/image_uploader/application/use_case';
+import { SaveImageUseCase, RemoveImageUseCase } from '@/image_uploader/application/use_case';
 import { ImplementationMongoose as ImplementationImageUploader } from '@/image_uploader/infrastructure/implementation/mongoose';
 import { CreateEntityException } from '@/shared/exceptions';
 
@@ -28,7 +28,7 @@ export const updateImagesController = async (req: Request, res: Response, next: 
             await useCase.run(product_id, delete_ids)
 
             // Delete Images
-            const deleteImageUseCase = new DeleteUseCase(mongooseImageUploaderRepository)
+            const deleteImageUseCase = new RemoveImageUseCase(mongooseImageUploaderRepository)
             await deleteImageUseCase.run(delete_ids)                        
         }
 

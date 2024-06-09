@@ -1,6 +1,6 @@
 import { ImageUploadRepository as Repository } from "@/image_uploader/domain/repositories"
 
-export class DeleteUseCase {
+export class RemoveImageUseCase {
 
     private readonly _repository: Repository
 

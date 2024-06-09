@@ -1,7 +1,7 @@
 import { SaveImageUseCase } from './Save'
-import { DeleteUseCase } from './Delete'
+import { RemoveImageUseCase } from './Remove'
 
 export {
     SaveImageUseCase,
-    DeleteUseCase,
+    RemoveImageUseCase,
 }
