@@ -37,7 +37,7 @@ class ImplementationMongoose implements Repository {
                 social_media: data.social_media,
             });
             return newEntity.toJSON() as Entity;
-        }catch {
+        }catch(e) {
             return null
         }
     }   
@@ -70,7 +70,7 @@ class ImplementationMongoose implements Repository {
 
     async update_image(shop_id: string, image_id: string): Promise<Entity | null> {        
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: shop_id }, { image: image_id }, { new: true });            
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: shop_id }, { images: image_id }, { new: true });            
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
             }        

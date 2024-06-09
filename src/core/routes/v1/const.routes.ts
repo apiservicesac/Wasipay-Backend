@@ -6,6 +6,7 @@ const SHOP_GET_ALL : string = '/get-all'
 const SHOP_GET_BY_ID : string = '/get-by-id/:id'
 const SHOP_DELETE : string = '/delete/:id'
 const SHOP_UPDATE : string = '/update/:id'
+const SHOP_UPDATE_IMAGE : string = '/update-image/:id'
 const SHOP_UPDATE_FIELD : string = '/update-field/:id'
 
 export const ROUTES_SHOP = {
@@ -15,6 +16,7 @@ export const ROUTES_SHOP = {
     SHOP_GET_BY_ID,
     SHOP_DELETE,
     SHOP_UPDATE,
+    SHOP_UPDATE_IMAGE,
     SHOP_UPDATE_FIELD,
 }
 

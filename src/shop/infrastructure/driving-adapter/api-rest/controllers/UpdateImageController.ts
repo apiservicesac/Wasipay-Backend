@@ -12,7 +12,7 @@ export const updateImageController = async (req: Request, res: Response, next: N
     try {
         const images = req?.files?.images;
 
-        const { shop_id } = req.body;
+        const { id: shop_id } = req.params;
         
         const mongooseImageUploaderRepository = new ImplementationImageUploader()
         const saveImageUseCase = new SaveImageUseCase(mongooseImageUploaderRepository)

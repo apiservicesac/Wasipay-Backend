@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ShopEntity as Entity } from '@/shop/domain/entities';
 import { CreateUseCase as UseCase } from '@/shop/application/use_cases';
-// import { ImplementationSequelize } from '@/shop/infrastructure/implementation/sequelize';
 import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
 
 export const createController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

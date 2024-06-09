@@ -4,6 +4,7 @@ import { getByIdController } from './GetByIdController'
 import { deleteController } from './DeleteController'
 import { updateController } from './UpdateController'
 import { updateFieldController } from './UpdateFieldController'
+import { updateImageController } from './UpdateImageController'
 
 export {
     createController,
@@ -12,4 +13,5 @@ export {
     deleteController,
     updateController,
     updateFieldController,
+    updateImageController,
 }

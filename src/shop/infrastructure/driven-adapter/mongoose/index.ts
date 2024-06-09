@@ -34,7 +34,7 @@ const ShopSchema = new conector_mongoose.Schema({
     },
     image: {
         type: conector_mongoose.Types.ObjectId, 
-        ref: "Image",
+        ref: "Image",        
     },
 }, { timestamps: true });
 
