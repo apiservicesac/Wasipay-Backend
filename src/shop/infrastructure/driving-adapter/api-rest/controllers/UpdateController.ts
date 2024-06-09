@@ -8,13 +8,20 @@ export const updateController = async (req: Request, res: Response, next: NextFu
     try {
         const entityId = req.params.id;
         
-        const body_data = req.body;
+        const { name, description, address, city, country, email, phone, social_media } = req.body;
 
 
         const data : Entity = {
-            ...body_data
+            name,
+            description,
+            address,
+            city,
+            country,
+            email,
+            phone,
+            social_media
         }
-
+        
         const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
         const datUpdated = await useCase.run(entityId, data)
