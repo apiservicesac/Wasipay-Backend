@@ -21,7 +21,7 @@ export const updateImageController = async (req: Request, res: Response, next: N
         const entity :any = await findEntity.run(shop_id)
 
         const saveImageUseCase = new SaveImageUseCase(mongooseImageUploaderRepository)
-        const images_entities = await saveImageUseCase.run(images)
+        const images_entities = await saveImageUseCase.run(entity.id.toString(), 'profile', null, images)
 
         if(images_entities.length === 0) throw new CreateEntityException()
         

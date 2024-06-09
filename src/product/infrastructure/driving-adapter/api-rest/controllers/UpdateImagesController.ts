@@ -22,7 +22,7 @@ export const updateImagesController = async (req: Request, res: Response, next: 
 
         // Find Product Exist
         const findEntity = new GetByIdUseCase(mongooseRepository)        
-        await findEntity.run(product_id)
+        const entity:any = await findEntity.run(product_id)
 
         const delete_ids : string[] | null = image_delete_ids ? JSON.parse(image_delete_ids) : null
         
@@ -38,7 +38,7 @@ export const updateImagesController = async (req: Request, res: Response, next: 
 
         // Add New Images
         const saveImageUseCase = new SaveImageUseCase(mongooseImageUploaderRepository)
-        const images_entities = await saveImageUseCase.run(images)
+        const images_entities = await saveImageUseCase.run(entity.shop_id.toString(), 'products', entity.id.toString(), images)
 
         if(images_entities.length === 0) throw new CreateEntityException()
         

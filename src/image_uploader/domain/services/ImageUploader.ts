@@ -5,23 +5,20 @@ import sha1 from 'sha1';
 import { ImageUploadException } from "@/image_uploader/domain/exceptions"
 
 export class ImageUploader {
-    private BASE_IMAGE_UPLOAD_PATH
 
-    constructor () {
-        this.BASE_IMAGE_UPLOAD_PATH = join(
-            process.env.PATH_IMAGES_UPLOAD!,
-            new Date().getFullYear().toString(),
-            new Date().getMonth().toString(),
-            new Date().getDate().toString(),
-          );
-    }
+  async upload(shop_folder: string, type: 'profile' | 'products', product_folder: string | null, image: any): Promise<Object> {
 
-  async upload(image: any): Promise<Object> {
+    const BASE_IMAGE_UPLOAD_PATH = join(
+      process.env.PATH_IMAGES_UPLOAD!,
+      shop_folder,
+      type,
+      product_folder ? product_folder : ''
+    );
 
-    mkdirSync(this.BASE_IMAGE_UPLOAD_PATH, { recursive: true });
+    mkdirSync(BASE_IMAGE_UPLOAD_PATH, { recursive: true });
     
     const imageName = sha1(Date.now().toString() + image.originalname);    
-    let imagePath = join(this.BASE_IMAGE_UPLOAD_PATH, `${imageName}.${image.mimetype.replace('image/', '')}`);        
+    let imagePath = join(BASE_IMAGE_UPLOAD_PATH, `${imageName}.${image.mimetype.replace('image/', '')}`);        
 
     try{
       switch (image.mimetype) {
