@@ -7,7 +7,7 @@ import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mon
 export const createController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         
-        const { name, description, address, city, country, postal_code, email, phone, social_media } = req.body;
+        const { name, description, address, city, country, email, phone, social_media } = req.body;
 
         const data : Entity = {
             name,
@@ -15,7 +15,6 @@ export const createController = async (req: Request, res: Response, next: NextFu
             address,
             city,
             country,
-            postal_code,
             email,
             phone,
             social_media

@@ -19,9 +19,6 @@ const ShopSchema = new conector_mongoose.Schema({
     country: {
         type: String,
     },
-    postal_code: {
-        type: String,
-    },
     email: {
         type: String,
     },

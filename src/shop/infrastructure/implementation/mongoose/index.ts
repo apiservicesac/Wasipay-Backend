@@ -31,7 +31,6 @@ class ImplementationMongoose implements Repository {
                 address: data.address,
                 city: data.city,
                 country: data.country,
-                postal_code: data.postal_code,
                 email: data.email,
                 phone: data.phone,
                 social_media: data.social_media,

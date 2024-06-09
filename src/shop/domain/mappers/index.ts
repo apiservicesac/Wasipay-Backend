@@ -11,7 +11,6 @@ export class ShopDtoMapper {
             address: entity.address,
             city: entity.city,
             country: entity.country,
-            postal_code: entity.postal_code,
             email: entity.email,
             phone: entity.phone,
             image: entity.image ? ImageDtoMapper.toJson(entity.image) : null,

@@ -8,7 +8,7 @@ export const updateController = async (req: Request, res: Response, next: NextFu
     try {
         const entityId = req.params.id;
         
-        const { name, description, address, city, country, postal_code, email, phone, social_media } = req.body;
+        const { name, description, address, city, country, email, phone, social_media } = req.body;
 
 
         const data : Entity = {
@@ -17,7 +17,6 @@ export const updateController = async (req: Request, res: Response, next: NextFu
             address,
             city,
             country,
-            postal_code,
             email,
             phone,
             social_media
