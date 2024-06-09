@@ -4,6 +4,8 @@ import { GetAllUseCase } from './GetAll'
 import { DeleteUseCase } from './Delete'
 import { UpdateUseCase } from './Update'
 import { UpdateFieldUseCase } from './UpdateField'
+import { AddImagesdUseCase } from './AddImages'
+import { DeleteImagesdUseCase } from './DeleteImages'
 
 export {
     CreateUseCase,
@@ -12,4 +14,6 @@ export {
     DeleteUseCase,
     UpdateUseCase,
     UpdateFieldUseCase,
+    AddImagesdUseCase,
+    DeleteImagesdUseCase,
 }

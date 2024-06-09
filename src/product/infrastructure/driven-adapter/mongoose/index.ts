@@ -40,10 +40,10 @@ const ProductSchema = new conector_mongoose.Schema({
     visibility: { 
         type: String, enum: ['PUBLISHED', 'SCHEDULED', 'HIDDEN'], required: true 
     },  
-    file_ids: [
+    images: [
         {
             type: conector_mongoose.Types.ObjectId, 
-            ref: "File",
+            ref: "Image",
         }
     ],
 }, { timestamps: true });

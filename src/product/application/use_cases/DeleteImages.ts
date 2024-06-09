@@ -1,9 +1,9 @@
 import { ProductEntity as Entity } from "@/product/domain/entities"
 import { ProductDtoMapper } from "@/product/domain/mappers"
 import { ProductRepository as Repository } from "@/product/domain/repositories"
-import { CreateEntityException } from "@/shared/exceptions"
+import { UpdateEntityException } from "@/shared/exceptions"
 
-export class CreateUseCase {
+export class DeleteImagesdUseCase {
 
     private readonly _repository: Repository
 
@@ -13,11 +13,11 @@ export class CreateUseCase {
         this._repository = repository
     }
 
-    async run(data: Entity): Promise<Entity> {
+    async run(id: string, image_ids: string[]): Promise<Entity> {
+       
+        const entity: Entity | null = await this._repository.update_delete_images(id, image_ids)
 
-        const entity: Entity | null = await this._repository.save(data)
-
-        if(entity === null) throw new CreateEntityException()
+        if(entity === null) throw new UpdateEntityException()
         
         return ProductDtoMapper.toJson(entity)
     }

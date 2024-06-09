@@ -10,7 +10,6 @@ export const updateController = async (req: Request, res: Response, next: NextFu
         
         const body_data = req.body;
 
-
         const data : Entity = {
             ...body_data,           
         }

@@ -5,10 +5,23 @@ import { ProductMongoose as Mongoose } from '@/product/infrastructure/driven-ada
 class ImplementationMongoose implements Repository {
 
     async getAll(shop_id: string): Promise<Entity[]> {
-        const result = await Mongoose.find({ shop_id: shop_id }).populate("file");
+        const result = await Mongoose.find({ shop_id: shop_id }).populate("images");
         const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
         return entities;
     }   
+
+    async getById(id: string): Promise<Entity | null> {
+        try {
+            const foundEntity = await Mongoose.findOne({ _id: id }).populate("images");
+        
+            if (!foundEntity) return null;
+        
+            return foundEntity.toJSON() as Entity;
+        }catch(e) {
+            return null
+        }
+
+    }
 
     async save (data: Entity): Promise<Entity | null> {
         try{
@@ -23,7 +36,7 @@ class ImplementationMongoose implements Repository {
 
     async update(id: string, data: Entity): Promise<Entity | null> {
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true });
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true }).populate("images");
             
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
@@ -34,18 +47,45 @@ class ImplementationMongoose implements Repository {
         }
     }   
     
-    async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
+    async update_add_images(id: string, image_ids: string[]): Promise<Entity | null> {        
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true });            
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id },{
+                $addToSet: { images: { $each: image_ids } },
+            }, { new: true }).populate("images");        
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
             }        
             return null;
-        } catch (error) {
-            console.log(error);            
+        } catch (error) {       
             return null;
         }
-    }   
+    }
+
+    async update_delete_images(id: string, image_ids: string[]): Promise<Entity | null> {        
+        try {
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id },{
+                $pull: { images: { $in: image_ids } }
+            }, { new: true }).populate("images");        
+            if (updatedEntity) {
+                return updatedEntity.toJSON() as Entity;
+            }        
+            return null;
+        } catch (error) {       
+            return null;
+        }
+    }
+    
+    async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
+        try {
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true }).populate("images");        
+            if (updatedEntity) {
+                return updatedEntity.toJSON() as Entity;
+            }        
+            return null;
+        } catch (error) {        
+            return null;
+        }
+    }
 
     async delete (id: string) : Promise<void | null > {
         try {
@@ -53,19 +93,6 @@ class ImplementationMongoose implements Repository {
         }catch (e) {
             return null;
         }        
-    }
-
-    async getById(id: string): Promise<Entity | null> {
-        try {
-            const foundEntity = await Mongoose.findOne({ _id: id }).populate("file");
-        
-            if (!foundEntity) return null;
-        
-            return foundEntity.toJSON() as Entity;
-        }catch(e) {
-            return null
-        }
-
     }
     
 }

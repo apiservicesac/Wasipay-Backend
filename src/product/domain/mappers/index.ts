@@ -1,3 +1,4 @@
+import { ImageDtoMapper } from "@/image_uploader/domain/mappers";
 import { ProductEntity as Entity } from "../entities";
 
 export class ProductDtoMapper {
@@ -15,7 +16,7 @@ export class ProductDtoMapper {
             product_category: entity.product_category,
             product_type: entity.product_type,
             shop_id: entity.shop_id,
-            images: entity.images,
+            images: entity.images ? entity.images.map((image) => ImageDtoMapper.toJson(image)) : null,
             status: entity.status,
             visibility: entity.visibility,
         };

@@ -27,6 +27,7 @@ const PRODUCT_GET_ALL : string = '/get-all/:shop_id'
 const PRODUCT_GET_BY_ID : string = '/get-by-id/:id'
 const PRODUCT_DELETE : string = '/delete/:id'
 const PRODUCT_UPDATE : string = '/update/:id'
+const PRODUCT_UPDATE_IMAGES : string = '/update-images/:id'
 const PRODUCT_UPDATE_FIELD : string = '/update-field/:id'
 
 export const ROUTES_PRODUCT = {
@@ -36,6 +37,7 @@ export const ROUTES_PRODUCT = {
     PRODUCT_GET_BY_ID,
     PRODUCT_DELETE,
     PRODUCT_UPDATE,
+    PRODUCT_UPDATE_IMAGES,
     PRODUCT_UPDATE_FIELD,
 }
 
