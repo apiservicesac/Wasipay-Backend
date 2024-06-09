@@ -15,7 +15,7 @@ export class ProductDtoMapper {
             product_category: entity.product_category,
             product_type: entity.product_type,
             shop_id: entity.shop_id,
-            file_ids: entity.file_ids,
+            images: entity.images,
             status: entity.status,
             visibility: entity.visibility,
         };

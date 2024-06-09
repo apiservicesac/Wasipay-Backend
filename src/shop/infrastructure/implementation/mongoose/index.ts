@@ -10,6 +10,19 @@ class ImplementationMongoose implements Repository {
         return entities;
     }   
 
+    async getById(id: string): Promise<Entity | null> {
+        try {
+            const foundEntity = await Mongoose.findOne({ _id: id }).populate("file");
+        
+            if (!foundEntity) return null;
+        
+            return foundEntity.toJSON() as Entity;
+        }catch(e) {
+            return null
+        }
+
+    }
+
     async save (data: Entity): Promise<Entity | null> {
         try{
             const newEntity = await Mongoose.create({
@@ -53,6 +66,18 @@ class ImplementationMongoose implements Repository {
             console.log(error);            
             return null;
         }
+    }  
+
+    async update_image(shop_id: string, image_id: string): Promise<Entity | null> {        
+        try {
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: shop_id }, { image: image_id }, { new: true });            
+            if (updatedEntity) {
+                return updatedEntity.toJSON() as Entity;
+            }        
+            return null;
+        } catch (error) {          
+            return null;
+        }
     }   
 
     async delete (id: string) : Promise<void | null > {
@@ -61,19 +86,6 @@ class ImplementationMongoose implements Repository {
         }catch (e) {
             return null;
         }        
-    }
-
-    async getById(id: string): Promise<Entity | null> {
-        try {
-            const foundEntity = await Mongoose.findOne({ _id: id }).populate("file");
-        
-            if (!foundEntity) return null;
-        
-            return foundEntity.toJSON() as Entity;
-        }catch(e) {
-            return null
-        }
-
     }
     
 }

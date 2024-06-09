@@ -6,7 +6,7 @@ import { CreateEntityException } from "@/shared/exceptions"
 import { ImageUploadException, ImageValidatorException } from "@/image_uploader/domain/exceptions"
 import { UploadedFile } from "express-fileupload"
 
-export class SaveUseCase {
+export class SaveImageUseCase {
 
     private readonly _repository: Repository
     private readonly _image_validator: ImageValidator
