@@ -13,7 +13,7 @@ export class GetByIdUseCase {
         this._repository = repository
     }
 
-    async run(id: string): Promise<Entity | null > {
+    async run(id: string): Promise<Entity> {
         const entity: Entity | null = await this._repository.getById(id)
 
         if(!entity) throw new NotFoundEntityException()
