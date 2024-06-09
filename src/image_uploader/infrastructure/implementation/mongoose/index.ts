@@ -4,6 +4,18 @@ import { ImageMongoose as Mongoose } from '@/image_uploader/infrastructure/drive
 
 class ImplementationMongoose implements Repository {
 
+    async getById (id: string): Promise<Entity | null> {
+        try{
+            const foundEntity = await Mongoose.findOne({ _id: id });
+        
+            if (!foundEntity) return null;
+        
+            return foundEntity.toJSON() as Entity;
+        }catch {
+            return null
+        }
+    }
+
     async save (data: Entity): Promise<Entity | null> {
         try{
             const newEntity = await Mongoose.create({
