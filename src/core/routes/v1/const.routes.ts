@@ -75,12 +75,3 @@ export const ROUTES_USER = {
     USER_UPDATE,
     USER_UPDATE_FIELD,
 }
-
-const IMAGE_SERVICE : string = '/image'
-const IMAGE_SAVE : string = '/upload'
-const IMAGE_DELETE : string = '/delete'
-export const ROUTES_IMAGE_SERVICE = {
-    IMAGE_SERVICE,
-    IMAGE_SAVE,
-    IMAGE_DELETE
-}
