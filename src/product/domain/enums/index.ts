@@ -11,6 +11,7 @@ export enum ProductState {
 }
 
 export enum ProductVisibility {
+    DRAFT = 'DRAFT',
     PUBLISHED = 'PUBLISHED',
     SCHEDULED = 'SCHEDULED',
     HIDDEN = 'HIDDEN',

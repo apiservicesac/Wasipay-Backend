@@ -42,7 +42,7 @@ const ProductSchema = new conector_mongoose.Schema({
         type: String, enum: ['AVAILABLE', 'SOLD_OUT', 'OUT_OF_STOCK'], required: true 
     },
     visibility: { 
-        type: String, enum: ['PUBLISHED', 'SCHEDULED', 'HIDDEN'], required: true 
+        type: String, enum: ['DRAFT', 'PUBLISHED', 'SCHEDULED', 'HIDDEN'], required: true 
     },  
     images: [
         {
