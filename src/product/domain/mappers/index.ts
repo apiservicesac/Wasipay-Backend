@@ -7,6 +7,7 @@ export class ProductDtoMapper {
         return {
             id: entity._id,
             name: entity.name,
+            code_product: entity.code_product,
             description: entity.description,
             price: entity.price,
             discount: entity.discount,
