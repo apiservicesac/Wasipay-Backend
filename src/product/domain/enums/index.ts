@@ -16,3 +16,8 @@ export enum ProductVisibility {
     SCHEDULED = 'SCHEDULED',
     HIDDEN = 'HIDDEN',
 }
+
+export enum ProductTax {
+    DRAFT = 'INCLUDE_PRICE',
+    PUBLISHED = 'NOT_INCLUDE_PRICE',
+}
