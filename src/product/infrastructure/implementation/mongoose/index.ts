@@ -30,15 +30,15 @@ class ImplementationMongoose implements Repository {
             const dayMonth = `${String(date.getDate()).padStart(2, '0')}${String(date.getMonth() + 1).padStart(2, '0')}`;
             
 
-            const lastProduct = await Mongoose.findOne({ shop_id: shop_id, code_product: { $regex: `^${prefix}-${dayMonth}-` } })
-                                             .sort({ code_product: -1 })
+            const lastProduct = await Mongoose.findOne({ shop_id: shop_id, product_code: { $regex: `^${prefix}-${dayMonth}-` } })
+                                             .sort({ product_code: -1 })
                                              .exec();
             
             let nextCode;
 
             if (lastProduct) {
                 const entity = lastProduct.toJSON() as Entity
-                const lastCode = entity.code_product!;
+                const lastCode = entity.product_code!;
                 const lastSequence = parseInt(lastCode.split('-')[2], 10);
                 const nextSequence = String(lastSequence + 1).padStart(3, '0');
                 nextCode = `${prefix}-${dayMonth}-${nextSequence}`;

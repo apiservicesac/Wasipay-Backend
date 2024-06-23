@@ -6,7 +6,7 @@ const ProductSchema = new conector_mongoose.Schema({
         type: String, 
         required: true 
     },
-    code_product : { 
+    product_code : { 
         type: String, 
         required: true 
     },

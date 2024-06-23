@@ -13,10 +13,10 @@ export class GetNextCodeUseCase {
 
     async run(shop_id: string): Promise<string> {
 
-        const code_product: string | null = await this._repository.getNextCode(shop_id)
+        const product_code: string | null = await this._repository.getNextCode(shop_id)
 
-        if(code_product === null) throw new NotFoundEntityException()
+        if(product_code === null) throw new NotFoundEntityException()
         
-        return code_product
+        return product_code
     }
 }
