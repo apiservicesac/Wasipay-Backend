@@ -38,6 +38,18 @@ const ProductSchema = new conector_mongoose.Schema({
     product_type: {
         type: String, enum: ['SINGLE', 'UNIT', 'BOX'], required: true 
     },
+    product_tax: {
+        type: String, enum: ['INCLUDE_PRICE', 'NOT_INCLUDE_PRICE'], required: true 
+
+    },
+    tags: {
+        type: [String],
+        required: true 
+    },
+    publish_date_time: { 
+        type: Date, 
+        default: Date.now 
+    },
     status: { 
         type: String, enum: ['AVAILABLE', 'SOLD_OUT', 'OUT_OF_STOCK'], required: true 
     },
