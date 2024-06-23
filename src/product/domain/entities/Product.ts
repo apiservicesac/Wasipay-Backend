@@ -1,5 +1,5 @@
 import { ImageEntity } from "@/image_uploader/domain/entities";
-import { ProductState, ProductType, ProductVisibility } from "../enums";
+import { ProductState, ProductTax, ProductType, ProductVisibility } from "../enums";
 
 export interface ProductEntity {
     _id?: string;
@@ -13,6 +13,9 @@ export interface ProductEntity {
     brand?: string;
     product_category?: string;
     product_type?: ProductType;
+    product_tax?: ProductTax,
+    tags?: string[],
+    publish_date_time: Date,
     shop_id?: string;
     images?: ImageEntity[];
     status?: ProductState;
