@@ -81,3 +81,21 @@ export const ROUTES_USER = {
     USER_UPDATE,
     USER_UPDATE_FIELD,
 }
+
+const ADDRESS : string = '/user'
+const ADDRESS_CREATE : string = '/create/:customer_id'
+const ADDRESS_GET_ALL : string = '/get-all'
+const ADDRESS_GET_BY_ID : string = '/get-by-id/:id'
+const ADDRESS_DELETE : string = '/delete/:id'
+const ADDRESS_UPDATE : string = '/update/:id'
+const ADDRESS_UPDATE_FIELD : string = '/update-field/:id'
+
+export const ROUTES_ADDRESS = {
+    ADDRESS,
+    ADDRESS_CREATE,
+    ADDRESS_GET_ALL,
+    ADDRESS_GET_BY_ID,
+    ADDRESS_DELETE,
+    ADDRESS_UPDATE,
+    ADDRESS_UPDATE_FIELD,
+}
