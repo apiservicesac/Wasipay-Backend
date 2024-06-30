@@ -43,6 +43,28 @@ export const ROUTES_PRODUCT = {
     PRODUCT_UPDATE_FIELD,
 }
 
+
+const ORDER : string = '/order'
+const ORDER_CREATE : string = '/create/:shop_id'
+const ORDER_GET_ALL : string = '/get-all/:shop_id'
+const ORDER_GET_BY_ID : string = '/get-by-id/:id'
+const ORDER_GET_NEXT_CODE : string = '/get-next-code/:shop_id'
+const ORDER_DELETE : string = '/delete/:id'
+const ORDER_UPDATE : string = '/update/:id'
+const ORDER_UPDATE_FIELD : string = '/update-field/:id'
+
+export const ROUTES_ORDER = {
+    ORDER,
+    ORDER_CREATE,
+    ORDER_GET_ALL,
+    ORDER_GET_BY_ID,
+    ORDER_GET_NEXT_CODE,
+    ORDER_DELETE,
+    ORDER_UPDATE,
+    ORDER_UPDATE_FIELD,
+}
+
+
 const PRODUCT_CATEGORY : string = '/product-category'
 const PRODUCT_CATEGORY_CREATE : string = '/create/:shop_id'
 const PRODUCT_CATEGORY_GET_ALL : string = '/get-all/:shop_id'
