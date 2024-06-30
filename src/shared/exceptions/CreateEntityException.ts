@@ -1,5 +1,5 @@
 export class CreateEntityException extends Error {
-    constructor () {
-        super("Error al crear el registro")
+    constructor (message: string = "Error al crear el registro") {
+        super(message)
     }
 }
