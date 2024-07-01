@@ -35,8 +35,8 @@ export class LoginUseCase {
 
         return {
             user: user_mapped,
-            access_token: this._token_manager.generateAccessToken(user._id, "USER"),
-            refresh_token: this._token_manager.generateRefreshToken(user._id, "USER"),
+            access_token: this._token_manager.generateAccessToken(user._id, user.role!),
+            refresh_token: this._token_manager.generateRefreshToken(user._id, user.role!),
         }
     }
 }
