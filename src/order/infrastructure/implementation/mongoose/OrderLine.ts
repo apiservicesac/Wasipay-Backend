@@ -64,5 +64,5 @@ class ImplementationMongoose implements Repository {
 }
 
 export {
-    ImplementationMongoose as ImplementationMongoose
+    ImplementationMongoose as OrderLineImplementationMongoose
 }
