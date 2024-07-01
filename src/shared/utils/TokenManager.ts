@@ -8,17 +8,17 @@ export class TokenManager {
         this.secretKey = process.env.JWT_SECRET_KEY || 'jwt_secret_key'
     }
 
-    public generateAccessToken(payload: any): string {        
+    public generateAccessToken(payload: any, role: string): string {        
         return jwt.sign(
-            {id: payload, type: 'access'},        
+            {id: payload, role, type: 'access'},        
             this.secretKey,
             { expiresIn: ms(3600000) }
         );
     }
 
-    public generateRefreshToken(payload: any): string {        
+    public generateRefreshToken(payload: any, role: string): string {        
         return jwt.sign(
-            {id: payload, type: 'refresh'},
+            {id: payload, role, type: 'refresh'},
             this.secretKey,
             { expiresIn: ms(3600000 * 24) }
         );

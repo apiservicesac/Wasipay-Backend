@@ -27,8 +27,10 @@ const UserSchema = new conector_mongoose.Schema({
         enum: ['USER_BUSINESS', 'USER_CUSTOMER'],
     },
     shop_id: {
-        type: String,
+        type: conector_mongoose.Types.ObjectId, 
+        ref: "Shop",
     },
+
 }, { timestamps: true });
 
 const UserMongoose = conector_mongoose.model('User', UserSchema);

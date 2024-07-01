@@ -1,10 +1,11 @@
-import { UserEntity as Entity } from "@/user/domain/entities"
 import { UserRepository as Repository } from "@/user/domain/repositories"
+import { UserEntity as Entity } from "@/user/domain/entities"
+import { UserDtoMapper } from "@/user/domain/mappers"
+import { UserResponse as Response } from "@/user/domain/entities"
+
 import { AuthenticateException } from "@/shared/exceptions"
 import { PasswordManager } from "@/shared/utils/PasswordManager"
 import { TokenManager } from "@/shared/utils/TokenManager"
-import { UserResponse as Response } from "@/user/domain/entities"
-import { UserDtoMapper } from "@/user/domain/mappers"
 
 export class LoginUseCase {
 
@@ -34,8 +35,8 @@ export class LoginUseCase {
 
         return {
             user: user_mapped,
-            access_token: this._token_manager.generateAccessToken(user._id),
-            refresh_token: this._token_manager.generateRefreshToken(user._id),
+            access_token: this._token_manager.generateAccessToken(user._id, "USER"),
+            refresh_token: this._token_manager.generateRefreshToken(user._id, "USER"),
         }
     }
 }

@@ -6,7 +6,6 @@ import ProductRoutes from '@/product/infrastructure/driving-adapter/api-rest/rou
 import OrderRoutes from '@/order/infrastructure/driving-adapter/api-rest/routes'
 import AddressRoutes from '@/address/infrastructure/driving-adapter/api-rest/routes'
 import ProductCategoryRoutes from '@/product_category/infrastructure/driving-adapter/api-rest/routes'
-
 import UserRoutes from '@/user/infrastructure/driving-adapter/api-rest/routes'
 
 const loggerMiddleware = new LoggerMiddleware()

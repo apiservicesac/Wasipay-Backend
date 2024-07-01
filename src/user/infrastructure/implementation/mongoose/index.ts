@@ -17,7 +17,6 @@ class ImplementationMongoose implements Repository {
             });
             return newEntity.toJSON() as Entity
         }catch(e) {
-            console.log(e)
             return null
         }
     }   
@@ -42,8 +41,7 @@ class ImplementationMongoose implements Repository {
                 return updatedEntity.toJSON() as Entity;
             }        
             return null;
-        } catch (error) {
-            console.log(error);            
+        } catch (error) {       
             return null;
         }
     }   

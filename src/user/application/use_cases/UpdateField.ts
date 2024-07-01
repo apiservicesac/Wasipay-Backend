@@ -1,7 +1,7 @@
-import { UserEntity as Entity } from "@/user/domain/entities"
 import { UserRepository as Repository } from "@/user/domain/repositories"
-import { UpdateEntityException } from "@/shared/exceptions"
+import { UserEntity as Entity } from "@/user/domain/entities"
 import { UserDtoMapper } from "@/user/domain/mappers"
+import { UpdateEntityException } from "@/shared/exceptions"
 
 export class UpdateFieldUseCase {
 
