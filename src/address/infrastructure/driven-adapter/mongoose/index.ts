@@ -1,7 +1,19 @@
 import { mongoose as conector_mongoose } from '@/shared/services/mongo-connector'
 
 const AddressSchema = new conector_mongoose.Schema({
-    address: {
+    first_name: {
+        type: String,
+        required: true,
+    },
+    last_name: {
+        type: String,
+        required: true,
+    },
+    phone_number: {
+        type: String,
+        required: true,
+    },
+    email: {
         type: String,
         required: true,
     },
