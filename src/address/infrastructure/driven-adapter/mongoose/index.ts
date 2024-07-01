@@ -1,6 +1,10 @@
 import { mongoose as conector_mongoose } from '@/shared/services/mongo-connector'
 
 const AddressSchema = new conector_mongoose.Schema({
+    address: {
+        type: String,
+        required: true,
+    },
     customer_id: {
         type: String,
         required: true,

@@ -1,5 +1,6 @@
 export interface AddressEntity {
     _id?: string;
+    address?: string;
     customer_id?: string;
     street?: string;
     city?: string;
