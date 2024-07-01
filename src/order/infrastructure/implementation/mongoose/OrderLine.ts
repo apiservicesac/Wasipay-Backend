@@ -16,6 +16,17 @@ class ImplementationMongoose implements Repository {
         }
 
     }
+
+    async save(entities: Entity[]): Promise<Entity[] | null> {
+        try {
+          const result = await Mongoose.insertMany(entities);
+          const newEntities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
+          return newEntities
+        } catch (error) {
+          console.error('Error saving entities:', error);
+          return null;
+        }
+    }
     
     async update(id: string, data: Entity): Promise<Entity | null> {
         try {
@@ -53,5 +64,5 @@ class ImplementationMongoose implements Repository {
 }
 
 export {
-    ImplementationMongoose as OrderLineImplementationMongoose
+    ImplementationMongoose as ImplementationMongoose
 }

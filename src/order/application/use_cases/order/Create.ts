@@ -24,7 +24,7 @@ export class CreateUseCase {
         
         let order_lines: OrderLineEntity[] | null = null
         if(typeof order.order_lines === 'object' && order.order_lines.length !== 0){
-            order_lines = await this._order_line_repository.save(orderEntity._id!, order.order_lines as OrderLineEntity[])
+            order_lines = await this._order_line_repository.save(order.order_lines as OrderLineEntity[])
         }        
         if(order_lines === null) throw new CreateEntityException("Error al crear la orden.")
         
