@@ -8,14 +8,8 @@ export interface AddressEntity {
     street?: string;
     city?: string;
     state?: string;
-    postal_code?: string;
-    coordinates?: Coordinates;
+    postal_code?: string;    
     country?: string;
     createdAt?: Date;
     updatedAt?: Date;   
-}
-
-interface Coordinates {
-    latitude: number,
-    longitude: number
 }

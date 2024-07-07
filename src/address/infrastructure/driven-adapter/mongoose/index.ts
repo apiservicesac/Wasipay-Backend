@@ -17,10 +17,6 @@ const AddressSchema = new conector_mongoose.Schema({
         type: String,
         required: true,
     },
-    customer_id: {
-        type: String,
-        required: true,
-    },
     street: {
         type: String,
         required: true,
@@ -38,10 +34,6 @@ const AddressSchema = new conector_mongoose.Schema({
     },
     postal_code: {
         type: String,
-    },
-    coordinates: {
-        type: Map,
-        of: Number
     },
 }, { timestamps: true });
 
