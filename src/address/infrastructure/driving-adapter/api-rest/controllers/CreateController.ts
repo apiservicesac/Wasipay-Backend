@@ -7,10 +7,8 @@ import { ImplementationMongoose } from '@/address/infrastructure/implementation/
 export const createController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {        
 
-        const customerId = req.params.customer_id
         const body_data : Entity = req.body;
-        body_data.customer_id = customerId
-        
+                
         const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
         const dataCreated = await useCase.run(body_data)

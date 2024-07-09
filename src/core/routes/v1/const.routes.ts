@@ -104,8 +104,8 @@ export const ROUTES_USER = {
     USER_UPDATE_FIELD,
 }
 
-const ADDRESS : string = '/user'
-const ADDRESS_CREATE : string = '/create/:customer_id'
+const ADDRESS : string = '/address'
+const ADDRESS_CREATE : string = '/create'
 const ADDRESS_GET_ALL : string = '/get-all'
 const ADDRESS_GET_BY_ID : string = '/get-by-id/:id'
 const ADDRESS_DELETE : string = '/delete/:id'
