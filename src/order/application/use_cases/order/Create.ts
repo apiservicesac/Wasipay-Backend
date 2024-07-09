@@ -17,18 +17,20 @@ export class CreateUseCase {
     }
 
     async run(order: OrderEntity): Promise<OrderEntity> {
-
-        const orderEntity: OrderEntity | null = await this._order_repository.save(order)
+        const { order_lines, ...without_order_lines } : any = order;
+        const orderEntity: OrderEntity | null = await this._order_repository.save(without_order_lines)
+        
         if(orderEntity === null) throw new CreateEntityException("Error al crear la orden.")
 
-        
-        let order_lines: OrderLineEntity[] | null = null
-        if(typeof order.order_lines === 'object' && order.order_lines.length !== 0){
-            order_lines = await this._order_line_repository.save(order.order_lines as OrderLineEntity[])
+
+        let _order_lines: OrderLineEntity[] | null = null
+        if(typeof order_lines === 'object' && order_lines.length !== 0){
+            console.log("order_lines")
+            _order_lines = await this._order_line_repository.save(order_lines as OrderLineEntity[])
         }        
-        if(order_lines === null) throw new CreateEntityException("Error al crear la orden.")
+        if(_order_lines === null) throw new CreateEntityException("Error al crear la orden.")
         
-        const orderUpdated: OrderEntity | null = await this._order_repository.update_field(orderEntity._id!, "order_lines", order_lines.flatMap((line) => line._id!))
+        const orderUpdated: OrderEntity | null = await this._order_repository.update_field(orderEntity._id!, "order_lines", _order_lines.flatMap((line) => line._id!))
         if(orderUpdated === null) throw new UpdateEntityException("Error al añadir las lineas de la orden")
 
         return OrderDtoMapper.toJson(orderUpdated)
