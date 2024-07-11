@@ -6,6 +6,7 @@ class ImplementationMongoose implements Repository {
 
     async getAll(shop_id: string): Promise<Entity[]> {
         const result = await Mongoose.find({ shop_id: shop_id })
+                                .populate("customer")
                                 .populate("shipping_address")
                                 .populate("billing_address")
                                 .populate("order_lines");
@@ -16,6 +17,7 @@ class ImplementationMongoose implements Repository {
     async getById(id: string): Promise<Entity | null> {
         try {
             const foundEntity = await Mongoose.findOne({ _id: id })
+                                    .populate("customer_i")
                                     .populate("shipping_address")
                                     .populate("billing_address")
                                     .populate("order_lines");
@@ -73,6 +75,7 @@ class ImplementationMongoose implements Repository {
     async update(id: string, data: Entity): Promise<Entity | null> {
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true })
+                                            .populate("customer")
                                             .populate("shipping_address")
                                             .populate("billing_address")
                                             .populate("order_lines");                        
@@ -89,6 +92,7 @@ class ImplementationMongoose implements Repository {
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true })
+                                            .populate("customer")                
                                             .populate("shipping_address")
                                             .populate("billing_address")
                                             .populate("order_lines");

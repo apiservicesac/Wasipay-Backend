@@ -9,9 +9,9 @@ const OrderSchema = new conector_mongoose.Schema({
         type: conector_mongoose.Types.ObjectId, 
         ref: "Shop",
     },
-    customer_id: { 
-        type: String, 
-        required: true 
+    customer: { 
+        type: conector_mongoose.Types.ObjectId, 
+        ref: "User", 
     },
     order_date: { 
         type: Date, 

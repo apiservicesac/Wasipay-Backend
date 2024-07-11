@@ -3,6 +3,8 @@ import { OrderEntity, OrderLineEntity } from "../entities";
 import { ProductEntity } from "@/product/domain/entities";
 import { AddressDtoMapper } from "@/address/domain/mappers";
 import { AddressEntity } from "@/address/domain/entities";
+import { UserEntity } from "@/user/domain/entities";
+import { UserDtoMapper } from "@/user/domain/mappers";
 
 export class OrderLineDtoMapper {
 
@@ -28,7 +30,7 @@ export class OrderDtoMapper {
         return {
             id: order._id,
             order_code: order.order_code,
-            customer_id: order.customer_id,
+            customer: this.isCustomerEntity(order.customer)? UserDtoMapper.toJson(order.customer) : order.customer,
             order_date: order.order_date,
             status: order.status,
             total_amount: order.total_amount,
@@ -50,6 +52,9 @@ export class OrderDtoMapper {
         return false;
     }
 
+    static isCustomerEntity(customer?: string | UserEntity): customer is UserEntity {
+        return (customer as UserEntity)?._id !== undefined && (customer as UserEntity)?._id !== null;
+    }
 
     static isAddressEntity(address?: string | AddressEntity): address is AddressEntity {
         return (address as AddressEntity)?._id !== undefined && (address as AddressEntity)?._id !== null;
