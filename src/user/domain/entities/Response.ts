@@ -1,5 +1,4 @@
-export interface UserResponse<T> {
-    user: T;
+export interface AtuhResponse {
     access_token: string;
     refresh_token: string;
 }

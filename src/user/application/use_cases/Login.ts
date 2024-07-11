@@ -1,7 +1,5 @@
 import { UserRepository as Repository } from "@/user/domain/repositories"
-import { UserEntity as Entity } from "@/user/domain/entities"
-import { UserDtoMapper } from "@/user/domain/mappers"
-import { UserResponse as Response } from "@/user/domain/entities"
+import { AtuhResponse as Response } from "@/user/domain/entities"
 
 import { AuthenticateException } from "@/shared/exceptions"
 import { PasswordManager } from "@/shared/utils/PasswordManager"
@@ -21,7 +19,7 @@ export class LoginUseCase {
         this._token_manager = new TokenManager()
     }
 
-    async run(email: string, password: string): Promise<Response<Entity>> {
+    async run(email: string, password: string): Promise<Response> {
 
         const user = await this._repository.getByEmail(email)
         
@@ -29,12 +27,9 @@ export class LoginUseCase {
 
         const isValidPassord = await this._password_manager.comparePasswords(password, user.password!)        
 
-        if (!isValidPassord) throw new AuthenticateException()
-        
-        const user_mapped = UserDtoMapper.toJson(user)
+        if (!isValidPassord) throw new AuthenticateException()        
 
         return {
-            user: user_mapped,
             access_token: this._token_manager.generateAccessToken(user._id, user.role!),
             refresh_token: this._token_manager.generateRefreshToken(user._id, user.role!),
         }

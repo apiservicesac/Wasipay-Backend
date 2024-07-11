@@ -1,7 +1,7 @@
 import { UserEntity } from "./User"
-import { UserResponse } from "./Response"
+import { AtuhResponse } from "./Response"
 
 export {
     UserEntity,
-    UserResponse
+    AtuhResponse
 }
