@@ -27,14 +27,14 @@ export class OrderDtoMapper {
     static toJson(order: OrderEntity): any {
         return {
             id: order._id,
-
+            order_code: order.order_code,
             customer_id: order.customer_id,
             order_date: order.order_date,
             status: order.status,
             total_amount: order.total_amount,
             shipping_address: this.isAddressEntity(order.shipping_address) ? AddressDtoMapper.toJson(order.shipping_address) : order.shipping_address,
             billing_address: this.isAddressEntity(order.billing_address) ? AddressDtoMapper.toJson(order.billing_address) : order.billing_address,
-            order_line: this.isOrderLineEntity(order.order_lines) ? order.order_lines.map((line) => OrderLineDtoMapper.toJson(line)) : order.order_lines
+            order_lines: this.isOrderLineEntity(order.order_lines) ? order.order_lines.map((line) => OrderLineDtoMapper.toJson(line)) : order.order_lines
         };
     }
 
