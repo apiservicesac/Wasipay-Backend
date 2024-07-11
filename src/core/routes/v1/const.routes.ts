@@ -121,3 +121,21 @@ export const ROUTES_ADDRESS = {
     ADDRESS_UPDATE,
     ADDRESS_UPDATE_FIELD,
 }
+
+const PAYMENT_METHOD : string = '/payment-method'
+const PAYMENT_METHOD_CREATE : string = '/create'
+const PAYMENT_METHOD_GET_ALL : string = '/get-all'
+const PAYMENT_METHOD_GET_BY_ID : string = '/get-by-id/:id'
+const PAYMENT_METHOD_DELETE : string = '/delete/:id'
+const PAYMENT_METHOD_UPDATE : string = '/update/:id'
+const PAYMENT_METHOD_UPDATE_FIELD : string = '/update-field/:id'
+
+export const ROUTES_PAYMENT_METHOD = {
+    PAYMENT_METHOD,
+    PAYMENT_METHOD_CREATE,
+    PAYMENT_METHOD_GET_ALL,
+    PAYMENT_METHOD_GET_BY_ID,
+    PAYMENT_METHOD_DELETE,
+    PAYMENT_METHOD_UPDATE,
+    PAYMENT_METHOD_UPDATE_FIELD,
+}
