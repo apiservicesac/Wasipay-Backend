@@ -31,7 +31,7 @@ export class OrderDtoMapper {
             id: order._id,
             order_code: order.order_code,
             customer: this.isCustomerEntity(order.customer)? UserDtoMapper.toJson(order.customer) : order.customer,
-            order_date: order.order_date,
+            order_date: order.order_date ? order.order_date.toLocaleString('es-PE') : null,
             status: order.status,
             total_amount: order.total_amount,
             shipping_address: this.isAddressEntity(order.shipping_address) ? AddressDtoMapper.toJson(order.shipping_address) : order.shipping_address,
