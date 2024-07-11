@@ -20,7 +20,7 @@ export class SaveImageUseCase {
         this._image_uploader = new ImageUploader()
     }
 
-    async run(shop_folder: string, type: 'profile' | 'products', product_folder: string | null, images: UploadedFile | UploadedFile[] | undefined): Promise<Entity[]> {
+    async run(shop_folder: string, type: 'profile' | 'products' | 'payments', name_folder: string | null, images: UploadedFile | UploadedFile[] | undefined): Promise<Entity[]> {
         
         if(!images) throw new ImageUploadException()
 
@@ -36,7 +36,7 @@ export class SaveImageUseCase {
             request_images.map(async (image) => {
                 const is_image_valid = this._image_validator.run(image)
                 if(!is_image_valid) throw new ImageValidatorException()
-                const image_uploaded : any = await this._image_uploader.upload(shop_folder, type, product_folder, image)
+                const image_uploaded : any = await this._image_uploader.upload(shop_folder, type, name_folder, image)
                 const newEntity : Entity = {
                     name: image_uploaded.file_name,
                     url: image_uploaded.file_path
