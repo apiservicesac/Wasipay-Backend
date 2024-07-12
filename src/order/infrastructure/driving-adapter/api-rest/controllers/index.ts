@@ -5,6 +5,7 @@ import { deleteController } from './DeleteController'
 import { updateController } from './UpdateController'
 import { updateFieldController } from './UpdateFieldController'
 import { getNextCodeController } from './GetNextCode'
+import { updatePaymentController } from './UpdatePaymentController'
 
 export {
     createController,
@@ -14,4 +15,5 @@ export {
     updateController,
     updateFieldController,
     getNextCodeController,
+    updatePaymentController,
 }

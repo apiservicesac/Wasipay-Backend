@@ -52,6 +52,7 @@ const ORDER_GET_NEXT_CODE : string = '/get-next-code/:shop_id'
 const ORDER_DELETE : string = '/delete/:id'
 const ORDER_UPDATE : string = '/update/:id'
 const ORDER_UPDATE_FIELD : string = '/update-field/:id'
+const ORDER_UPDATE_PAYMENT : string = '/update-payment/:order_payment_id'
 
 export const ROUTES_ORDER = {
     ORDER,
@@ -62,6 +63,7 @@ export const ROUTES_ORDER = {
     ORDER_DELETE,
     ORDER_UPDATE,
     ORDER_UPDATE_FIELD,
+    ORDER_UPDATE_PAYMENT,
 }
 
 
