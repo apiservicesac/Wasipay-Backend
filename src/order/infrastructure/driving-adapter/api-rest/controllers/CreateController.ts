@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import { OrderEntity as Entity } from '@/order/domain/entities';
 import { CreateUseCase as UseCase } from '@/order/application/use_cases/order';
-import { OrderImplementationMongoose } from '@/order/infrastructure/implementation/mongoose';
+import { OrderImplementationMongoose, OrderPaymentImplementationMongoose } from '@/order/infrastructure/implementation/mongoose';
 import { OrderLineImplementationMongoose } from '@/order/infrastructure/implementation/mongoose';
 
 
@@ -19,7 +19,8 @@ export const createController = async (req: Request, res: Response, next: NextFu
         
         const orderRepository = new OrderImplementationMongoose()
         const orderLineRepository = new OrderLineImplementationMongoose()
-        const useCase = new UseCase(orderRepository, orderLineRepository)
+        const orderPaymentRepository = new OrderPaymentImplementationMongoose()
+        const useCase = new UseCase(orderRepository, orderLineRepository, orderPaymentRepository)
         const dataCreated = await useCase.run(data)
 
         res.status(201).json({
