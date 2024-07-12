@@ -29,6 +29,12 @@ const ShopSchema = new conector_mongoose.Schema({
         type: Map,
         of: String
     },
+    payment_method: [
+        {
+            type: conector_mongoose.Types.ObjectId, 
+            ref: "PaymentMethod",        
+        }
+    ],
     image: {
         type: conector_mongoose.Types.ObjectId, 
         ref: "Image",        
