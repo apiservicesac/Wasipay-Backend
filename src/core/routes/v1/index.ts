@@ -7,7 +7,7 @@ import OrderRoutes from '@/order/infrastructure/driving-adapter/api-rest/routes'
 import AddressRoutes from '@/address/infrastructure/driving-adapter/api-rest/routes'
 import ProductCategoryRoutes from '@/product_category/infrastructure/driving-adapter/api-rest/routes'
 import UserRoutes from '@/user/infrastructure/driving-adapter/api-rest/routes'
-
+import PaymentMethodRoutes from '@/payment_method/infrastructure/driving-adapter/api-rest/routes'
 const loggerMiddleware = new LoggerMiddleware()
 const route = Router() 
 
@@ -17,5 +17,6 @@ route.use(ROUTE_VERSION, loggerMiddleware.logRequestInfo, ProductCategoryRoutes)
 route.use(ROUTE_VERSION, loggerMiddleware.logRequestInfo, UserRoutes)
 route.use(ROUTE_VERSION, loggerMiddleware.logRequestInfo, OrderRoutes)
 route.use(ROUTE_VERSION, loggerMiddleware.logRequestInfo, AddressRoutes)
+route.use(ROUTE_VERSION, loggerMiddleware.logRequestInfo, PaymentMethodRoutes)
 
 export default route
