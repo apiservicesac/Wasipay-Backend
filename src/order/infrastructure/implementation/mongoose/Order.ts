@@ -6,6 +6,13 @@ class ImplementationMongoose implements Repository {
 
     async getAll(shop_id: string): Promise<Entity[]> {
         const result = await Mongoose.find({ shop_id: shop_id })
+                                .populate("payment")
+                                .populate({
+                                    path: 'payment',
+                                    populate: {
+                                        path: 'payment_method'
+                                    }
+                                })
                                 .populate("customer")
                                 .populate("shipping_address")
                                 .populate("billing_address")
@@ -17,6 +24,13 @@ class ImplementationMongoose implements Repository {
     async getById(id: string): Promise<Entity | null> {
         try {
             const foundEntity = await Mongoose.findOne({ _id: id })
+                                    .populate("payment")
+                                    .populate({
+                                        path: 'payment',
+                                        populate: {
+                                            path: 'payment_method'
+                                        }
+                                    })
                                     .populate("customer_i")
                                     .populate("shipping_address")
                                     .populate("billing_address")
@@ -75,6 +89,13 @@ class ImplementationMongoose implements Repository {
     async update(id: string, data: Entity): Promise<Entity | null> {
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true })
+                                            .populate("payment")
+                                            .populate({
+                                                path: 'payment',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                             .populate("customer")
                                             .populate("shipping_address")
                                             .populate("billing_address")
@@ -92,6 +113,13 @@ class ImplementationMongoose implements Repository {
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true })
+                                            .populate("payment")
+                                            .populate({
+                                                path: 'payment',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                             .populate("customer")                
                                             .populate("shipping_address")
                                             .populate("billing_address")
