@@ -13,13 +13,17 @@ const OrderSchema = new conector_mongoose.Schema({
         type: conector_mongoose.Types.ObjectId, 
         ref: "User", 
     },
+    payment: { 
+        type: conector_mongoose.Types.ObjectId, 
+        ref: "OrderPayment", 
+    },
     order_date: { 
         type: Date, 
         default: Date.now 
     },
     status: { 
         type: String, 
-        enum: ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'], 
+        enum: ['PENDING', 'PROCESSING', 'NEW', 'SHIPPED', 'DELIVERED', 'CANCELLED'], 
         required: true 
     },
     total_amount: { 
