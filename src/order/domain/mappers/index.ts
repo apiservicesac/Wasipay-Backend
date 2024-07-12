@@ -1,10 +1,13 @@
 import { ProductDtoMapper } from "@/product/domain/mappers";
-import { OrderEntity, OrderLineEntity } from "../entities";
+import { OrderEntity, OrderLineEntity, OrderPaymentEntity } from "../entities";
 import { ProductEntity } from "@/product/domain/entities";
 import { AddressDtoMapper } from "@/address/domain/mappers";
 import { AddressEntity } from "@/address/domain/entities";
 import { UserEntity } from "@/user/domain/entities";
 import { UserDtoMapper } from "@/user/domain/mappers";
+import { PaymentMethodEntity } from "@/payment_method/domain/entities";
+import { PaymentMethodDtoMapper } from "@/payment_method/domain/mappers";
+import { ImageDtoMapper } from "@/image_uploader/domain/mappers";
 
 export class OrderLineDtoMapper {
 
@@ -34,6 +37,7 @@ export class OrderDtoMapper {
             order_date: order.order_date ? order.order_date.toLocaleString('es-PE') : null,
             status: order.status,
             total_amount: order.total_amount,
+            payment: this.isOrderPaymentEntity(order.payment) ? OrderPaymentDtoMapper.toJson(order.payment) : order.payment,
             shipping_address: this.isAddressEntity(order.shipping_address) ? AddressDtoMapper.toJson(order.shipping_address) : order.shipping_address,
             billing_address: this.isAddressEntity(order.billing_address) ? AddressDtoMapper.toJson(order.billing_address) : order.billing_address,
             order_lines: this.isOrderLineEntity(order.order_lines) ? order.order_lines.map((line) => OrderLineDtoMapper.toJson(line)) : order.order_lines
@@ -52,6 +56,10 @@ export class OrderDtoMapper {
         return false;
     }
 
+    static isOrderPaymentEntity(order_payment?: string | OrderPaymentEntity): order_payment is OrderPaymentEntity {
+        return (order_payment as OrderPaymentEntity)?._id !== undefined && (order_payment as OrderPaymentEntity)?._id !== null;
+    }
+
     static isCustomerEntity(customer?: string | UserEntity): customer is UserEntity {
         return (customer as UserEntity)?._id !== undefined && (customer as UserEntity)?._id !== null;
     }
@@ -61,3 +69,16 @@ export class OrderDtoMapper {
     }
 }
 
+export class OrderPaymentDtoMapper {
+    static toJson(order_payment: OrderPaymentEntity): any {
+        return {
+            id: order_payment._id,
+            payment_method: this.isAddressEntity(order_payment.payment_method) ? PaymentMethodDtoMapper.toJson(order_payment.payment_method) : order_payment.payment_method,
+            image: order_payment.image ? ImageDtoMapper.toJson(order_payment.image) : null,
+        }
+    }
+
+    static isAddressEntity(payment_method?: string | PaymentMethodEntity): payment_method is PaymentMethodEntity {
+        return (payment_method as PaymentMethodEntity)?._id !== undefined && (payment_method as PaymentMethodEntity)?._id !== null;
+    }
+}
