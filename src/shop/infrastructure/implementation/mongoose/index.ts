@@ -8,11 +8,17 @@ class ImplementationMongoose implements Repository {
         const result = await Mongoose.find()
                                 .populate("payment_method")
                                 .populate({
-                                                path: 'payment_method',
-                                                populate: {
-                                                    path: 'payment_method'
-                                                }
-                                            })
+                                    path: 'payment_method',
+                                    populate: {
+                                        path: 'payment_method'
+                                    }
+                                })
+                                .populate({
+                                    path: 'payment_method',
+                                    populate: {
+                                        path: 'image'
+                                    }
+                                })
                                 .populate("image");
         const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
         return entities;
@@ -23,11 +29,17 @@ class ImplementationMongoose implements Repository {
             const foundEntity = await Mongoose.findOne({ _id: id })
                                         .populate("payment_method")
                                         .populate({
-                                                path: 'payment_method',
-                                                populate: {
-                                                    path: 'payment_method'
-                                                }
-                                            })
+                                            path: 'payment_method',
+                                            populate: {
+                                                path: 'payment_method'
+                                            }
+                                        })
+                                        .populate({
+                                            path: 'payment_method',
+                                            populate: {
+                                                path: 'image'
+                                            }
+                                        })
                                         .populate("image");
         
             if (!foundEntity) return null;
@@ -67,6 +79,12 @@ class ImplementationMongoose implements Repository {
                                                     path: 'payment_method'
                                                 }
                                             })
+                                            .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'image'
+                                                }
+                                            })
                                             .populate("image");
             
             if (updatedEntity) {
@@ -88,6 +106,12 @@ class ImplementationMongoose implements Repository {
                                                     path: 'payment_method'
                                                 }
                                             })
+                                            .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'image'
+                                                }
+                                            })
                                             .populate("image");
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
@@ -107,6 +131,12 @@ class ImplementationMongoose implements Repository {
                                                 path: 'payment_method',
                                                 populate: {
                                                     path: 'payment_method'
+                                                }
+                                            })
+                                            .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'image'
                                                 }
                                             })
                                             .populate("image");
