@@ -7,9 +7,9 @@ import { ImageUploadException } from "@/image_uploader/domain/exceptions"
 
 export class ImageUploader {
 
-  async upload(shop_folder: string, type: 'profile' | 'products' | 'payments', name_folder: string | null, image: any): Promise<Object> {
-    const resize_width = type === 'profile' || type ===  'payments' ? 112 : 224  
-    const resize_height = type === 'profile' || type ===  'payments' ? 112 : 300
+  async upload(shop_folder: string, type: 'profile' | 'products'  | 'shop_payments' | 'order_payments', name_folder: string | null, image: any): Promise<Object> {
+    const resize_width = type === 'profile' || type ===  'order_payments' ? 112 : 224  
+    const resize_height = type === 'profile' || type ===  'order_payments' ? 112 : 300
     const BASE_IMAGE_UPLOAD_PATH = join(
       process.env.PATH_IMAGES_UPLOAD!,
       shop_folder,
