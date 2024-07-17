@@ -141,3 +141,18 @@ export const ROUTES_PAYMENT_METHOD = {
     PAYMENT_METHOD_UPDATE,
     PAYMENT_METHOD_UPDATE_FIELD,
 }
+
+
+const PAYMENT_METHOD_SHOP : string = '/payment-method-shop'
+const PAYMENT_METHOD_SHOP_CREATE : string = '/create/:shop_id'
+const PAYMENT_METHOD_SHOP_DELETE : string = '/delete/:shop_id/:id'
+const PAYMENT_METHOD_SHOP_UPDATE : string = '/update/:id'
+const PAYMENT_METHOD_SHOP_UPDATE_FIELD : string = '/update-field/:id'
+
+export const ROUTES_PAYMENT_METHOD_SHOP = {
+    PAYMENT_METHOD_SHOP,
+    PAYMENT_METHOD_SHOP_CREATE,
+    PAYMENT_METHOD_SHOP_DELETE,
+    PAYMENT_METHOD_SHOP_UPDATE,
+    PAYMENT_METHOD_SHOP_UPDATE_FIELD,
+}
