@@ -20,7 +20,7 @@ export class SaveImageUseCase {
         this._image_uploader = new ImageUploader()
     }
 
-    async run(shop_folder: string, type: 'profile' | 'products' | 'payments', name_folder: string | null, images: UploadedFile | UploadedFile[] | undefined): Promise<Entity[]> {
+    async run(shop_folder: string, type: 'profile' | 'products' | 'shop_payments' | 'order_payments', name_folder: string | null, images: UploadedFile | UploadedFile[] | undefined): Promise<Entity[]> {
         
         if(!images) throw new ImageUploadException()
 

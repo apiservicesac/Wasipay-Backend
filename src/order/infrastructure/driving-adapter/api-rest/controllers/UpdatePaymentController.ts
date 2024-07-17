@@ -18,7 +18,7 @@ export const updatePaymentController = async (req: Request, res: Response, next:
         
         const mongooseImageUploaderRepository = new ImplementationImageUploader()
         const saveImageUseCase = new SaveImageUseCase(mongooseImageUploaderRepository)
-        const images_entities = await saveImageUseCase.run(shop_id, 'payments', null, images)    
+        const images_entities = await saveImageUseCase.run(shop_id, 'order_payments', null, images)    
         if(images_entities.length === 0) throw new CreateEntityException()
 
         const orderPaymentRepository = new OrderPaymentImplementationMongoose()

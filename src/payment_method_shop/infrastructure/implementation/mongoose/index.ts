@@ -6,23 +6,25 @@ import { ShopMongoose } from '@/shop/infrastructure/driven-adapter/mongoose';
 class ImplementationMongoose implements Repository {
 
     async save (shop_id: string, entity: Entity): Promise<Entity | null> {
-        try{
-            const newEntity = await Mongoose.create({
+        try {
+            const newEntity : any = await Mongoose.create({
                 ...entity
             });
-            const _new = newEntity.toJSON() as Entity
+            const populatedEntity = await newEntity.populate("image")
+            const _new = populatedEntity.toJSON() as Entity;
             await ShopMongoose.findOneAndUpdate({ _id: shop_id },{
                 $addToSet: { payment_method: { $each: [_new?._id!] } },
             }, { new: true })
-            return _new
-        }catch(e) {
-            return null
+            return _new;
+        } catch(e) {
+            return null;
         }
-    }   
+    }
+    
 
     async update(id: string, data: Entity): Promise<Entity | null> {
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true });
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true }).populate("image");
             
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
@@ -35,7 +37,7 @@ class ImplementationMongoose implements Repository {
     
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true });            
+            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true }).populate("image");            
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
             }        
