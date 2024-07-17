@@ -7,6 +7,12 @@ class ImplementationMongoose implements Repository {
     async getAll(): Promise<Entity[]> {
         const result = await Mongoose.find()
                                 .populate("payment_method")
+                                .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                 .populate("image");
         const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
         return entities;
@@ -16,6 +22,12 @@ class ImplementationMongoose implements Repository {
         try {
             const foundEntity = await Mongoose.findOne({ _id: id })
                                         .populate("payment_method")
+                                        .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                         .populate("image");
         
             if (!foundEntity) return null;
@@ -49,6 +61,12 @@ class ImplementationMongoose implements Repository {
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true })
                                             .populate("payment_method")
+                                            .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                             .populate("image");
             
             if (updatedEntity) {
@@ -64,6 +82,12 @@ class ImplementationMongoose implements Repository {
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true })
                                             .populate("payment_method")
+                                            .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                             .populate("image");
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
@@ -79,6 +103,12 @@ class ImplementationMongoose implements Repository {
         try {
             const updatedEntity = await Mongoose.findOneAndUpdate({ _id: shop_id }, { image: image_id }, { new: true })
                                             .populate("payment_method")
+                                            .populate({
+                                                path: 'payment_method',
+                                                populate: {
+                                                    path: 'payment_method'
+                                                }
+                                            })
                                             .populate("image");
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;

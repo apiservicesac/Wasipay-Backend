@@ -32,7 +32,7 @@ const ShopSchema = new conector_mongoose.Schema({
     payment_method: [
         {
             type: conector_mongoose.Types.ObjectId, 
-            ref: "PaymentMethod",        
+            ref: "PaymentMethodShop",        
         }
     ],
     image: {
