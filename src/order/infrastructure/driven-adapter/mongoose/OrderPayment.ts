@@ -3,7 +3,7 @@ import { mongoose as conector_mongoose } from '@/shared/services/mongo-connector
 const OrderPaymentSchema = new conector_mongoose.Schema({
     payment_method: {
         type: conector_mongoose.Types.ObjectId, 
-        ref: "PaymentMethod",
+        ref: "PaymentMethodShop",
     },
     image: {
         type: conector_mongoose.Types.ObjectId, 

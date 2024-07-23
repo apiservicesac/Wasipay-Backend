@@ -6,11 +6,13 @@ class ImplementationMongoose implements Repository {
 
     async getAll(shop_id: string): Promise<Entity[]> {
         const result = await Mongoose.find({ shop_id: shop_id })
-                                .populate("payment")
                                 .populate({
                                     path: 'payment',
                                     populate: {
-                                        path: 'payment_method'
+                                        path: 'payment_method',
+                                        populate: {
+                                            path: 'payment_method'
+                                        }
                                     }
                                 })
                                 .populate("customer")

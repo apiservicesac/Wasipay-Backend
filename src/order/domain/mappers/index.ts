@@ -8,6 +8,8 @@ import { UserDtoMapper } from "@/user/domain/mappers";
 import { PaymentMethodEntity } from "@/payment_method/domain/entities";
 import { PaymentMethodDtoMapper } from "@/payment_method/domain/mappers";
 import { ImageDtoMapper } from "@/image_uploader/domain/mappers";
+import { PaymentMethodShopEntity } from "@/payment_method_shop/domain/entities";
+import { PaymentMethodShopDtoMapper } from "@/payment_method_shop/domain/mappers";
 
 export class OrderLineDtoMapper {
 
@@ -73,12 +75,12 @@ export class OrderPaymentDtoMapper {
     static toJson(order_payment: OrderPaymentEntity): any {
         return {
             id: order_payment._id,
-            payment_method: this.isAddressEntity(order_payment.payment_method) ? PaymentMethodDtoMapper.toJson(order_payment.payment_method) : order_payment.payment_method,
+            payment_method: this.isPaymentMethodShop(order_payment.payment_method) ? PaymentMethodShopDtoMapper.toJson(order_payment.payment_method) : order_payment.payment_method,
             image: order_payment.image ? ImageDtoMapper.toJson(order_payment.image) : null,
         }
     }
 
-    static isAddressEntity(payment_method?: string | PaymentMethodEntity): payment_method is PaymentMethodEntity {
-        return (payment_method as PaymentMethodEntity)?._id !== undefined && (payment_method as PaymentMethodEntity)?._id !== null;
+    static isPaymentMethodShop(payment_method?: string | PaymentMethodShopEntity): payment_method is PaymentMethodShopEntity {
+        return (payment_method as PaymentMethodShopEntity)?._id !== undefined && (payment_method as PaymentMethodShopEntity)?._id !== null;
     }
 }
