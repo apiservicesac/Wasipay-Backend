@@ -82,7 +82,8 @@ class ImplementationMongoose implements Repository {
             const newEntity = await Mongoose.create({
                 ...data
             });
-            return newEntity.toJSON() as Entity;
+            const getEntity = await this.getById((newEntity.toJSON() as Entity)._id!)
+            return getEntity
         }catch {
             return null
         }
