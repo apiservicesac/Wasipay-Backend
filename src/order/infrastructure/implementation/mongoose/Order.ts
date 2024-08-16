@@ -33,7 +33,7 @@ class ImplementationMongoose implements Repository {
                                             path: 'payment_method'
                                         }
                                     })
-                                    .populate("customer_i")
+                                    .populate("customer")
                                     .populate("shipping_address")
                                     .populate("billing_address")
                                     .populate("order_lines");
