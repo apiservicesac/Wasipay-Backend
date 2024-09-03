@@ -12,8 +12,8 @@ export class GetAllUseCase {
         this._repository = repository
     }
 
-    async run(shop_id: string): Promise<Entity[] | null > {
-        const entities: Entity[] | null = await this._repository.getAll(shop_id)
+    async run(): Promise<Entity[] | null > {
+        const entities: Entity[] | null = await this._repository.getAll()
         return entities.map((entity) => ProductDtoMapper.toJson(entity))
     }
 }

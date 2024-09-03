@@ -1,25 +1,17 @@
-import { ImageEntity } from "@/image_uploader/domain/entities";
-import { ProductState, ProductTax, ProductType, ProductVisibility } from "../enums";
-
 export interface ProductEntity {
-    _id?: string;
-    name?: string;
-    product_code?: string; 
-    description?: string;
-    price?: number;
+    id?: string;
+    title?: string;
+    price?: string;
+    price_offer?: string;
+    price_card?: string;
     discount?: number;
-    quantity?: number;
-    sku?: string;
     brand?: string;
-    product_category?: string;
-    product_type?: ProductType;
-    product_tax?: ProductTax,
-    tags?: string[],
-    publish_date_time: Date,
-    shop_id?: string;
-    images?: ImageEntity[];
-    status?: ProductState;
-    visibility?: ProductVisibility;
+    url?: string;
+    category_main?: string;
+    category?: string;
+    subcategory?: string;     
+    // shop_id?: string;
+    image?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

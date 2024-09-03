@@ -1,25 +1,24 @@
-import { ImageDtoMapper } from "@/image_uploader/domain/mappers";
 import { ProductEntity as Entity } from "../entities";
 
 export class ProductDtoMapper {
 
     static toJson(entity: Entity): any {
         return {
-            id: entity._id,
-            name: entity.name,
-            product_code: entity.product_code,
-            description: entity.description,
+            id: entity.id,
+            title: entity.title,
             price: entity.price,
+            price_offer: entity.price_offer,
+            price_card: entity.price_card,
             discount: entity.discount,
-            quantity: entity.quantity,
-            sku: entity.sku,
             brand: entity.brand,
-            product_category: entity.product_category,
-            product_type: entity.product_type,
-            shop_id: entity.shop_id,
-            images: entity.images ? entity.images.map((image) => ImageDtoMapper.toJson(image)) : null,
-            status: entity.status,
-            visibility: entity.visibility,
+            url: entity.url,
+            category_main: entity.category_main,
+            category: entity.category,
+            subcategory: entity.subcategory,
+            // shop_id: entity.shop_id,
+            image: entity.image,
+            createdAt: entity.createdAt,
+            updatedAt: entity.updatedAt,
         };
     }
 }
