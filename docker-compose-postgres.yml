@@ -12,13 +12,15 @@ services:
     ports:
       - "5450:5432"
     volumes:
-      - ./wasipay-postgres-data:/var/lib/postgresql/data
+      - wasipay-postgres-data:/var/lib/postgresql/data
     networks:
       - backend_network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 30s
       timeout: 10s
-      retries: 5  
+      retries: 5        
 networks:
   backend_network:
+volumes:
+  wasipay-postgres-data:
