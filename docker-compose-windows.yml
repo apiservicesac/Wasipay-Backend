@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  wasipay-windows:
+    image: dockurr/windows
+    container_name: wasipay-windows
+    environment:
+      VERSION: "win11"
+      LANGUAGE: "Spanish"
+      REGION: "es-PE"
+      KEYBOARD: "es-PE"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      USERNAME: "wasipay"
+      PASSWORD: "wasipay"
+    devices:
+      - /dev/kvm
+    cap_add:
+      - NET_ADMIN
+    volumes:
+    -  ./local_share_windows:/shared
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    stop_grace_period: 2m

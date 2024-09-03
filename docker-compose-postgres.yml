@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  wasipay-postgres:
+    container_name: wasipay-postgres
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: wasipay
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: wasipay
+      POSTGRES_HOST: 37.60.239.85
+    ports:
+      - "5450:5432"
+    volumes:
+      - ./wasipay-postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5  
+networks:
+  backend_network:
