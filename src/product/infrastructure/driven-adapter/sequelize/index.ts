@@ -20,17 +20,20 @@ ProductSequelize.init(
         brand: {
             type: DataTypes.STRING,
         },
+        discount: {
+            type: DataTypes.STRING,
+        },
         price: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
         },
         price_offer: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
         },
         price_card: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
         },
         image: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
         },
         url: {
             type: DataTypes.TEXT,
