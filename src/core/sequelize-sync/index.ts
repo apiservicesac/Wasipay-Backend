@@ -6,7 +6,7 @@ import { ProductSequelize } from "@/product/infrastructure/driven-adapter/sequel
 import { UserSequelize } from "@/user/infrastructure/driven-adapter/sequelize";
 
 // Sincronizar las tablas en el orden correcto
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
     .then(async () => {
 
         await ProductSequelize.sync().then(() => {
