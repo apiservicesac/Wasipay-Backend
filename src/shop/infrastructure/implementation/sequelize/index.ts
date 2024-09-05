@@ -52,11 +52,9 @@ class ImplementationSequelize implements Repository {
 
             if (affectedCount > 0 && updatedEntities.length > 0) {                
                 return await this.getById(id)
-            }
-        
+            }        
             return null;
         } catch(e) {
-            console.log(e)
             return null
         }   
         
@@ -71,11 +69,13 @@ class ImplementationSequelize implements Repository {
     }
 
     async getById(id: string): Promise<Entity | null> {
-        const foundEntity = await Sequelize.findOne({ where: { id }, include: [{ model: ImageSequelize, as: 'image' }] });
-    
-        if (!foundEntity) return null;
-    
-        return foundEntity.toJSON() as Entity;
+        try {
+            const foundEntity = await Sequelize.findOne({ where: { id }, include: [{ model: ImageSequelize, as: 'image' }] });
+            if (!foundEntity) return null;    
+            return foundEntity.toJSON() as Entity;
+        }catch (e) {
+            return null;
+        }        
     }
     
 }

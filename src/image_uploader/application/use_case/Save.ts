@@ -20,33 +20,20 @@ export class SaveImageUseCase {
         this._image_uploader = new ImageUploader()
     }
 
-    async run(shop_folder: string, type: 'profile' | 'products' | 'shop_payments' | 'order_payments', name_folder: string | null, images: UploadedFile | UploadedFile[] | undefined): Promise<Entity[]> {
+    async run(shop_folder: string, type: 'profile', name_folder: string | null, image: UploadedFile | undefined): Promise<Entity> {
         
-        if(!images) throw new ImageUploadException()
-
-        let request_images : UploadedFile[] = []
-
-        if (images instanceof Array) {
-            request_images = images;
-        } else {
-            request_images = [images!];
+        if(!image) throw new ImageUploadException()
+        
+        const is_image_valid = this._image_validator.run(image)
+        if(!is_image_valid) throw new ImageValidatorException()
+        const image_uploaded : any = await this._image_uploader.upload(shop_folder, type, name_folder, image)
+        const newEntity : Entity = {
+            name: image_uploaded.image_name,
+            url: image_uploaded.image_path
         }
+        const entity: Entity | null = await this._repository.save(newEntity)
         
-        const entities_response : Entity[] = await Promise.all(
-            request_images.map(async (image) => {
-                const is_image_valid = this._image_validator.run(image)
-                if(!is_image_valid) throw new ImageValidatorException()
-                const image_uploaded : any = await this._image_uploader.upload(shop_folder, type, name_folder, image)
-                const newEntity : Entity = {
-                    name: image_uploaded.image_name,
-                    url: image_uploaded.image_path
-                }
-                const entity: Entity | null = await this._repository.save(newEntity)
-                if(entity === null) throw new CreateEntityException()
-                return entity
-            })  
-        )
-
-        return entities_response
+        if(entity === null) throw new CreateEntityException()
+        return entity
     }
 }

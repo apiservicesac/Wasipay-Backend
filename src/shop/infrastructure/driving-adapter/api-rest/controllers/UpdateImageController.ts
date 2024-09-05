@@ -5,12 +5,12 @@ import { ImplementationSequelize } from '@/shop/infrastructure/implementation/se
 
 import { RemoveImageUseCase, SaveImageUseCase } from '@/image_uploader/application/use_case';
 import { ImplementationSequelize as ImplementationImageUploader } from '@/image_uploader/infrastructure/implementation/sequelize';
-import { CreateEntityException } from '@/shared/exceptions';
+import { UploadedFile } from 'express-fileupload';
 
 
 export const updateImageController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const images = req?.files?.images;
+        const image = req?.files?.image;
 
         const { id: shopid } = req.params;
 
@@ -21,13 +21,11 @@ export const updateImageController = async (req: Request, res: Response, next: N
         const entity :any = await findEntity.run(shopid)
 
         const saveImageUseCase = new SaveImageUseCase(mongooseImageUploaderRepository)
-        const images_entities = await saveImageUseCase.run(entity.id.toString(), 'profile', null, images)
-
-        if(images_entities.length === 0) throw new CreateEntityException()
+        const image_entity = await saveImageUseCase.run(entity.id.toString(), 'profile', null, image as UploadedFile)
         
         // Update Image Shop
         const useCase = new UpdateImageUseCase(repository)        
-        const datUpdated = await useCase.run(shopid, images_entities[0].id!)
+        const datUpdated = await useCase.run(shopid, image_entity.id!)
         
         if(entity.image){
             // Delete Images

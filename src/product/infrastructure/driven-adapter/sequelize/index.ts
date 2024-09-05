@@ -56,12 +56,5 @@ ProductSequelize.init(
     }
 )
 
-ProductSequelize.sync()
-.then(() => {
-    loggerDataBase.warn('TABLA Product => Las tablas se han sincronizado correctamente');
-})
-.catch((error) => {
-    loggerDataBase.warn('TABLA Product => Error al sincronizar las tablas:', error);
-});
 
 export { ProductSequelize }

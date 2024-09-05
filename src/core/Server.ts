@@ -6,7 +6,7 @@ import { error } from 'console'
 import swaggerDocV1 from './swagger/swagger'
 import { logger,log4js } from '@/shared/utils/Logger'
 import fileUpload from 'express-fileupload'
-import { sequelize } from "@/shared/services/sequelize-conector"
+import './sequelize-sync'
 import './sequelize-associations'
 
 export class Server {
@@ -57,14 +57,6 @@ export class Server {
                     `Version 1 Docs disponible en http://${this._host}:${this._port}/api/v1/docs`
                 )
                 logger.info(' Presione CTRL-C para detener\n')
-
-                // Conectase a la base de datos
-                // Force true: DROP TABLES
-                sequelize.sync({ force: false }).then(() => {
-                    console.log("Nos hemos conectado a la base de datos");
-                }).catch(error => {
-                    console.log('Se ha producido un error', error);
-                })
                 
                 resolve()
             })

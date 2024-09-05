@@ -13,9 +13,9 @@ export class UpdateImageUseCase {
         this._repository = repository
     }
 
-    async run(shopid: string, imageid: string): Promise<Entity> {
+    async run(shop_id: string, image_id: string): Promise<Entity> {
        
-        const entity: Entity | null = await this._repository.update_image(shopid, imageid)
+        const entity: Entity | null = await this._repository.update_image(shop_id, image_id)
         
         if(entity === null) throw new UpdateEntityException()
         
