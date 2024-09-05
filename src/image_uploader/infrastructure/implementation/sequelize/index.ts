@@ -1,14 +1,8 @@
-import { FileEntity as Entity } from '@/image_uploader/domain/entities'
-import { FileUploadRepository as Repository } from '@/image_uploader/domain/repositories'
+import { ImageEntity as Entity } from '@/image_uploader/domain/entities'
+import { ImageUploadRepository as Repository } from '@/image_uploader/domain/repositories'
 import { FileSequelize as Sequelize } from '@/image_uploader/infrastructure/driven-adapter/sequelize'
 
-class ImplementationSequelize implements Repository {
-
-    async getAll(): Promise<Entity[]> {
-        const result = await Sequelize.findAll();
-        const entities: Entity[] = result.map((sequelize: Sequelize) => sequelize.toJSON() as Entity);
-        return entities;
-    }    
+class ImplementationSequelize implements Repository {   
 
     async save (data: Entity): Promise<Entity | null> {
         try{
@@ -22,19 +16,9 @@ class ImplementationSequelize implements Repository {
         }
     }   
 
-    async update(data: Entity): Promise<Entity | null> {
-        const [affectedCount, updatedEntities] = await Sequelize.update(data, { where: { id: data.id }, returning: true });
-        
-        if (affectedCount > 0 && updatedEntities.length > 0) {
-            return updatedEntities[0].toJSON() as Entity;
-        }
-    
-        return null;
-    }   
-
-    async delete (id: string) : Promise<void | null > {
+    async delete (ids: string[]) : Promise<void | null > {
         try {
-            await Sequelize.destroy({ where: { id } })
+            await Sequelize.destroy({ where: { ids } })
         }catch (e) {
             return null;
         }
