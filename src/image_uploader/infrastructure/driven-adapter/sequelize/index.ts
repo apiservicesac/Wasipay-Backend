@@ -5,9 +5,9 @@ import { loggerDataBase } from '@/shared/utils/Logger';
 
 dotenv.config()
 
-class FileSequelize extends Model {}
-  
-FileSequelize.init(
+class ImageSequelize extends Model {}
+
+ImageSequelize.init(
     {
         id: {
             unique: true,
@@ -23,25 +23,14 @@ FileSequelize.init(
         url: {
             type: DataTypes.STRING,
             allowNull: false
-        },       
-
+        },
     },
     {
         sequelize,
-        modelName: 'File',
-        tableName: 'file',
+        modelName: 'Image',
+        tableName: 'image',
         timestamps: true,
     }
 )
 
-
-FileSequelize.sync()
-.then(() => {
-    loggerDataBase.warn('TABLA FILE API => Las tablas se han sincronizado correctamente');
-})
-.catch((error) => {
-    loggerDataBase.warn('TABLA FILE API => Error al sincronizar las tablas:', error);
-});
-
-
-export { FileSequelize }
+export { ImageSequelize }

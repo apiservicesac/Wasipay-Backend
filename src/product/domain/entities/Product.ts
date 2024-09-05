@@ -10,7 +10,7 @@ export interface ProductEntity {
     category_main?: string;
     category?: string;
     subcategory?: string;     
-    // shop_id?: string;
+    // shopid?: string;
     image?: string;
     createdAt?: Date;
     updatedAt?: Date;

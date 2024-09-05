@@ -2,7 +2,7 @@ import { UserEntity as Entity } from '@/user/domain/entities'
 import { UserRepository as Repository } from '@/user/domain/repositories'
 import { UserMongoose as Mongoose } from '@/user/infrastructure/driven-adapter/mongoose'
 
-class ImplementationMongoose implements Repository {
+class ImplementationSequelize implements Repository {
 
     async getAll(): Promise<Entity[]> {
         const result = await Mongoose.find();
@@ -23,7 +23,7 @@ class ImplementationMongoose implements Repository {
 
     async update(id: string, data: Entity): Promise<Entity | null> {
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, data, { new: true });
+            const updatedEntity = await Mongoose.findOneAndUpdate({ id: id }, data, { new: true });
             
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
@@ -36,7 +36,7 @@ class ImplementationMongoose implements Repository {
     
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
         try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ _id: id }, {[field]: value}, { new: true });            
+            const updatedEntity = await Mongoose.findOneAndUpdate({ id: id }, {[field]: value}, { new: true });            
             if (updatedEntity) {
                 return updatedEntity.toJSON() as Entity;
             }        
@@ -48,7 +48,7 @@ class ImplementationMongoose implements Repository {
 
     async delete (id: string) : Promise<void | null > {
         try {
-            await Mongoose.deleteOne({ _id: id });
+            await Mongoose.deleteOne({ id: id });
         }catch (e) {
             return null;
         }        
@@ -56,7 +56,7 @@ class ImplementationMongoose implements Repository {
 
     async getById(id: string): Promise<Entity | null> {
         try {
-            const foundEntity = await Mongoose.findOne({ _id: id })
+            const foundEntity = await Mongoose.findOne({ id: id })
         
             if (!foundEntity) return null;
         
@@ -82,5 +82,5 @@ class ImplementationMongoose implements Repository {
 }
 
 export {
-    ImplementationMongoose
+    ImplementationSequelize
 }

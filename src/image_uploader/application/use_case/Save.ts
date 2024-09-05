@@ -38,8 +38,8 @@ export class SaveImageUseCase {
                 if(!is_image_valid) throw new ImageValidatorException()
                 const image_uploaded : any = await this._image_uploader.upload(shop_folder, type, name_folder, image)
                 const newEntity : Entity = {
-                    name: image_uploaded.file_name,
-                    url: image_uploaded.file_path
+                    name: image_uploaded.image_name,
+                    url: image_uploaded.image_path
                 }
                 const entity: Entity | null = await this._repository.save(newEntity)
                 if(entity === null) throw new CreateEntityException()

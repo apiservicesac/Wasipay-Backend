@@ -1,5 +1,5 @@
 export interface ImageEntity {
-    _id?: string
+    id?: string
     name?: string
     url?: string
     createdAt?: Date

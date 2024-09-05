@@ -17,14 +17,10 @@ export class RemoveImageUseCase {
 
     }
 
-    async run(ids: string[]): Promise<void> {                
-        await Promise.all(
-            ids.map(async (id) => {                
-                const entity: Entity | null = await this._repository.getById(id)
-                if(entity === null) throw new NotFoundEntityException()            
-                await this._image_remove.run(entity?.url!)
-            })  
-        ) 
-        await this._repository.delete(ids)
+    async run(id: string): Promise<void> {                
+        const entity: Entity | null = await this._repository.getById(id)
+        if(entity === null) throw new NotFoundEntityException()            
+        await this._image_remove.run(entity?.url!)
+        await this._repository.delete(id)
     }
 }

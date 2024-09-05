@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { GetByIdUseCase, UpdateImageUseCase } from '@/shop/application/use_cases';
-import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
+import { ImplementationSequelize } from '@/shop/infrastructure/implementation/sequelize';
 
 import { RemoveImageUseCase, SaveImageUseCase } from '@/image_uploader/application/use_case';
-import { ImplementationMongoose as ImplementationImageUploader } from '@/image_uploader/infrastructure/implementation/mongoose';
+import { ImplementationSequelize as ImplementationImageUploader } from '@/image_uploader/infrastructure/implementation/sequelize';
 import { CreateEntityException } from '@/shared/exceptions';
 
 
@@ -12,13 +12,13 @@ export const updateImageController = async (req: Request, res: Response, next: N
     try {
         const images = req?.files?.images;
 
-        const { id: shop_id } = req.params;
+        const { id: shopid } = req.params;
 
-        const mongooseRepository = new ImplementationMongoose()
+        const repository = new ImplementationSequelize()
         const mongooseImageUploaderRepository = new ImplementationImageUploader()
         
-        const findEntity = new GetByIdUseCase(mongooseRepository)        
-        const entity :any = await findEntity.run(shop_id)
+        const findEntity = new GetByIdUseCase(repository)        
+        const entity :any = await findEntity.run(shopid)
 
         const saveImageUseCase = new SaveImageUseCase(mongooseImageUploaderRepository)
         const images_entities = await saveImageUseCase.run(entity.id.toString(), 'profile', null, images)
@@ -26,13 +26,13 @@ export const updateImageController = async (req: Request, res: Response, next: N
         if(images_entities.length === 0) throw new CreateEntityException()
         
         // Update Image Shop
-        const useCase = new UpdateImageUseCase(mongooseRepository)        
-        const datUpdated = await useCase.run(shop_id, images_entities[0]._id!)
+        const useCase = new UpdateImageUseCase(repository)        
+        const datUpdated = await useCase.run(shopid, images_entities[0].id!)
         
         if(entity.image){
             // Delete Images
-            const deleteImageUseCase = new RemoveImageUseCase(mongooseImageUploaderRepository)
-            await deleteImageUseCase.run([entity.image.id])            
+            const deleteImageUseCase = new RemoveImageUseCase(mongooseImageUploaderRepository)            
+            await deleteImageUseCase.run(entity.image.id)            
         }
 
         res.status(200).json({
@@ -43,6 +43,7 @@ export const updateImageController = async (req: Request, res: Response, next: N
         })
 
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

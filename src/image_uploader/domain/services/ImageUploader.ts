@@ -47,8 +47,8 @@ export class ImageUploader {
       `${process.env.IMAGE_SERVER_UPLOADS!}/uploads`,
     );
     return {
-      file_name: imageName,
-      file_path: imagePath
+      image_name: imageName,
+      image_path: imagePath
     };
   }
 }

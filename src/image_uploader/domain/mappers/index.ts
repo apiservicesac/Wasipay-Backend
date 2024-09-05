@@ -4,7 +4,7 @@ export class ImageDtoMapper {
 
     static toJson(entity: Entity): any {
         return {
-            id: entity._id,
+            id: entity.id,
             name: entity.name,
             url: entity.url,            
         };

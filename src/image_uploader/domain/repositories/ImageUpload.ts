@@ -5,5 +5,5 @@ export interface ImageUploadRepository {
 
     save: (entity: Entity) => Promise<Entity | null>
 
-    delete: (ids: string[]) => Promise<void | null>
+    delete: (id: string) => Promise<void | null>
 }

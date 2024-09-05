@@ -31,8 +31,8 @@ export class LoginUseCase {
         if (!isValidPassord) throw new AuthenticateException()        
 
         return {
-            access_token: this._token_manager.generateAccessToken(user._id!, user.role!),
-            refresh_token: this._token_manager.generateRefreshToken(user._id!, user.role!),
+            access_token: this._token_manager.generateAccessToken(user.id!, user.role!),
+            refresh_token: this._token_manager.generateRefreshToken(user.id!, user.role!),
         }
     }
 }

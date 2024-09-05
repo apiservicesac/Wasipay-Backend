@@ -1,9 +1,13 @@
-import { FileSequelize } from "@/image_uploader/infrastructure/driven-adapter/sequelize";
+import { ImageSequelize } from "@/image_uploader/infrastructure/driven-adapter/sequelize";
 import { ShopSequelize } from "@/shop/infrastructure/driven-adapter/sequelize";
 
-// ShopSequelize.js
-ShopSequelize.belongsToMany(FileSequelize, { as: 'image', through: 'shop_image', timestamps: false });
+// Definir las asociaciones
+ShopSequelize.belongsTo(ImageSequelize, {
+    as: 'image',
+    foreignKey: 'imageId'
+});
 
-// FileSequelize.js
-FileSequelize.belongsToMany(ShopSequelize, { as: 'image', through: 'image_shop', timestamps: false });
-
+ImageSequelize.hasOne(ShopSequelize, {
+    as: 'shop',
+    foreignKey: 'imageId'
+});

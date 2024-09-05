@@ -1,6 +1,6 @@
 import { ImageEntity as Entity } from '@/image_uploader/domain/entities'
 import { ImageUploadRepository as Repository } from '@/image_uploader/domain/repositories'
-import { FileSequelize as Sequelize } from '@/image_uploader/infrastructure/driven-adapter/sequelize'
+import { ImageSequelize as Sequelize } from '@/image_uploader/infrastructure/driven-adapter/sequelize'
 
 class ImplementationSequelize implements Repository {   
 
@@ -16,9 +16,9 @@ class ImplementationSequelize implements Repository {
         }
     }   
 
-    async delete (ids: string[]) : Promise<void | null > {
+    async delete (id: string) : Promise<void | null > {
         try {
-            await Sequelize.destroy({ where: { ids } })
+            await Sequelize.destroy({ where: { id } })
         }catch (e) {
             return null;
         }

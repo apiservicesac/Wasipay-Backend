@@ -26,7 +26,7 @@ const UserSchema = new conector_mongoose.Schema({
         type: String,
         enum: ['USER_BUSINESS', 'USER_CUSTOMER'],
     },
-    shop_id: {
+    shopid: {
         type: conector_mongoose.Types.ObjectId, 
         ref: "Shop",
     },
