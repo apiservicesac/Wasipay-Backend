@@ -8,8 +8,6 @@ export interface UserEntity {
     email?: string;
     password?: string;
     role?: UserRole;
-    shopid?: string;
     createdAt?: Date;
     updatedAt?: Date;
-
 }

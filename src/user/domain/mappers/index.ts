@@ -10,7 +10,6 @@ export class UserDtoMapper {
             phone_number: entity.phone_number,
             email: entity.email,
             role: entity.role,
-            shop: entity.shopid ? entity.shopid : null,            
         };
     }
 }

@@ -1,82 +1,75 @@
 import { UserEntity as Entity } from '@/user/domain/entities'
 import { UserRepository as Repository } from '@/user/domain/repositories'
-import { UserMongoose as Mongoose } from '@/user/infrastructure/driven-adapter/mongoose'
+import { UserSequelize as Sequelize } from '@/user/infrastructure/driven-adapter/sequelize'
 
 class ImplementationSequelize implements Repository {
 
     async getAll(): Promise<Entity[]> {
-        const result = await Mongoose.find();
-        const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
+        const result = await Sequelize.findAll();
+        const entities: Entity[] = result.map((sequelize: Sequelize) => sequelize.toJSON());
         return entities;
-    }   
+    }    
 
-    async save (entity: Entity): Promise<Entity | null> {
+    async save (data: Entity): Promise<Entity | null> {
         try{
-            const newEntity = await Mongoose.create({
-                ...entity
-            });
-            return newEntity.toJSON() as Entity
+            const newEntity = await Sequelize.create({
+                ...data
+            });     
+            return newEntity.toJSON() as Entity;
         }catch(e) {
             return null
         }
     }   
 
     async update(id: string, data: Entity): Promise<Entity | null> {
-        try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ id: id }, data, { new: true });
-            
-            if (updatedEntity) {
-                return updatedEntity.toJSON() as Entity;
-            }        
-            return null;
-        } catch (error) {
-            return null;
+        const [affectedCount, updatedEntities] = await Sequelize.update(data, { where: { id: id }, returning: true });
+        
+        if (affectedCount > 0 && updatedEntities.length > 0) {
+            return updatedEntities[0].toJSON() as Entity;
         }
+    
+        return null;
     }   
     
     async update_field(id : string, field: string, value : any): Promise<Entity | null> {        
-        try {
-            const updatedEntity = await Mongoose.findOneAndUpdate({ id: id }, {[field]: value}, { new: true });            
-            if (updatedEntity) {
-                return updatedEntity.toJSON() as Entity;
-            }        
-            return null;
-        } catch (error) {       
-            return null;
+        const [affectedCount, updatedEntities] = await Sequelize.update({[field] : value }, { where: { id }, returning: true });        
+        if (affectedCount > 0 && updatedEntities.length > 0) {
+            return updatedEntities[0].toJSON() as Entity;
         }
+    
+        return null;
     }   
 
     async delete (id: string) : Promise<void | null > {
         try {
-            await Mongoose.deleteOne({ id: id });
+            await Sequelize.destroy({ where: { id } })
         }catch (e) {
             return null;
-        }        
+        }
     }
 
     async getById(id: string): Promise<Entity | null> {
         try {
-            const foundEntity = await Mongoose.findOne({ id: id })
-        
+            const foundEntity = await Sequelize.findOne({ where: { id } });
+    
             if (!foundEntity) return null;
-        
-            return foundEntity.toJSON() as Entity;
-        }catch(e) {
-            return null
+
+            return foundEntity.toJSON()  as Entity;
+        }catch {
+            return null;
         }
     }
 
     async getByEmail(email: string): Promise<Entity | null> {
         try {
-            const foundEntity = await Mongoose.findOne({ email })
-        
+            const foundEntity = await Sequelize.findOne({ where: { email } });
+    
             if (!foundEntity) return null;
-        
-            return foundEntity.toJSON() as Entity;
-        }catch(e) {
-            return null
-        }
 
+            return foundEntity.toJSON() as Entity;
+        }catch {
+            return null;
+        }
     }
     
 }

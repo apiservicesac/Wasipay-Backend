@@ -3,9 +3,10 @@ import { sequelize } from '@/shared/services/sequelize-conector/index';
 import { ImageSequelize } from "@/image_uploader/infrastructure/driven-adapter/sequelize";
 import { ShopSequelize } from "@/shop/infrastructure/driven-adapter/sequelize";
 import { ProductSequelize } from "@/product/infrastructure/driven-adapter/sequelize";
+import { UserSequelize } from "@/user/infrastructure/driven-adapter/sequelize";
 
 // Sincronizar las tablas en el orden correcto
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
     .then(async () => {
 
         await ProductSequelize.sync().then(() => {
@@ -27,6 +28,13 @@ sequelize.sync({ force: false })
         })
         .catch((error) => {
             loggerDataBase.warn('TABLA Shop => Error al sincronizar las tablas:', error);
+        });
+        
+        await UserSequelize.sync().then(() => {
+            loggerDataBase.warn('TABLA User => Las tablas se han sincronizado correctamente');
+        })
+        .catch((error) => {
+            loggerDataBase.warn('TABLA User => Error al sincronizar las tablas:', error);
         });
     })
     .catch((error) => {
