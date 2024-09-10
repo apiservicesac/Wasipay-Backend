@@ -7,7 +7,9 @@ export class ShopDtoMapper {
         return {
             id: entity.id,
             name: entity.name,
+            description: entity.description,
             image: entity.image ? ImageDtoMapper.toJson(entity.image) : null,
+            social_media: entity.social_media,
         };
     }
 }

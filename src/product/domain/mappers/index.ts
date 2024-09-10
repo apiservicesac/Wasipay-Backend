@@ -1,3 +1,4 @@
+import { ShopDtoMapper } from "@/shop/domain/mappers";
 import { ProductEntity as Entity } from "../entities";
 
 export class ProductDtoMapper {
@@ -15,7 +16,7 @@ export class ProductDtoMapper {
             category_main: entity.category_main,
             category: entity.category,
             subcategory: entity.subcategory,
-            // shopid: entity.shopid,
+            shop: entity.shop  ? ShopDtoMapper.toJson(entity.shop) : null,
             image: entity.image,
             createdAt: entity.createdAt,
             updatedAt: entity.updatedAt,

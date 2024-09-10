@@ -1,9 +1,8 @@
-import { sequelize } from '@/shared/services/sequelize-conector/index'
-import dotenv from 'dotenv'
+import { sequelize } from '@/shared/services/sequelize-conector/index';
+import dotenv from 'dotenv';
 import { DataTypes, Model } from 'sequelize';
-import { loggerDataBase } from '@/shared/utils/Logger';
 
-dotenv.config()
+dotenv.config();
 
 class ShopSequelize extends Model {}
 
@@ -19,7 +18,11 @@ ShopSequelize.init(
             unique: true,
             allowNull: false
         },
-        imageId: {
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        image_id: {
             type: DataTypes.UUID,
             references: {
                 model: 'image',
@@ -27,13 +30,17 @@ ShopSequelize.init(
             },
             allowNull: true,
         },
+        social_media: {
+            type: DataTypes.JSONB,
+            allowNull: true,
+        },
     },
     {
         sequelize,
         modelName: 'Shop',
         tableName: 'shop',
-        timestamps: false,
+        timestamps: true,
     }
-)
+);
 
-export { ShopSequelize }
+export { ShopSequelize };

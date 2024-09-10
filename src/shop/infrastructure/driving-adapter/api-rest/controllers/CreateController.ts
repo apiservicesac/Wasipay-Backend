@@ -7,10 +7,12 @@ import { ImplementationSequelize } from '@/shop/infrastructure/implementation/se
 export const createController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         
-        const { name } = req.body;
+        const { name, description, social_media } = req.body;
 
         const data : Entity = {
-            name,
+            name, 
+            description, 
+            social_media
         }
         
         const repository = new ImplementationSequelize()

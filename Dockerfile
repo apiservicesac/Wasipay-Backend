@@ -2,7 +2,7 @@
 FROM node:latest
 
 # Establece el directorio de trabajo en la imagen
-WORKDIR /usr/src/backend_js_azzorti
+WORKDIR /usr/src/wasipay-backend
 
 # Copia los archivos del proyecto al directorio de trabajo de la imagen
 COPY . .
@@ -14,7 +14,7 @@ RUN npm install
 RUN npm run tsc
 
 # Expone el puerto en el que se ejecutará la aplicación
-EXPOSE 3065
+EXPOSE 3098
 
 # Comando para ejecutar la aplicación cuando se inicie el contenedor
 CMD ["npm", "start"]

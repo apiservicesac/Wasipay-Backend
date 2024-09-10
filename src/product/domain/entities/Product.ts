@@ -1,3 +1,5 @@
+import { ShopEntity } from "@/shop/domain/entities";
+
 export interface ProductEntity {
     id?: string;
     title?: string;
@@ -10,7 +12,7 @@ export interface ProductEntity {
     category_main?: string;
     category?: string;
     subcategory?: string;     
-    // shopid?: string;
+    shop?: ShopEntity;
     image?: string;
     createdAt?: Date;
     updatedAt?: Date;

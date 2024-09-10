@@ -4,11 +4,17 @@ import { ProductSequelize as Sequelize } from '@/product/infrastructure/driven-a
 
 class ImplementationSequelize implements Repository {
 
-    async getAll(): Promise<Entity[]> {
-        const result = await Sequelize.findAll();
-        const entities: Entity[] = result.map((sequelize: Sequelize) => sequelize.toJSON() as Entity);
-        return entities;
-    }    
+    async getAll(shop_id: string, page: number, pageSize: number): Promise<{ rows: Entity[], count: number }> {
+        const offset = (page - 1) * pageSize;
+        const result = await Sequelize.findAndCountAll({
+            where: { shop_id: shop_id },
+            limit: pageSize,
+            offset: offset
+        });
+    
+        const entities: Entity[] = result.rows.map((sequelize: Sequelize) => sequelize.toJSON() as Entity);
+        return { rows: entities, count: result.count };
+    }      
 
     async getById(id: string): Promise<Entity | null> {
         const foundEntity = await Sequelize.findOne({ where: { id } });

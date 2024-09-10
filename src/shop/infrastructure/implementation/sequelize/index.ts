@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { ImageSequelize } from '@/image_uploader/infrastructure/driven-adapter/sequelize';
 import { ShopEntity as Entity } from '@/shop/domain/entities'
 import { ShopRepository as Repository } from '@/shop/domain/repositories'
@@ -6,7 +7,12 @@ import { ShopSequelize as Sequelize } from '@/shop/infrastructure/driven-adapter
 class ImplementationSequelize implements Repository {
 
     async getAll(): Promise<Entity[]> {
-        const result = await Sequelize.findAll();
+        const result = await Sequelize.findAll({
+            include: [{ model: ImageSequelize, as: 'image' }],
+            // where: {
+            //     id: { [Op.ne]: process.env.SHOP_ID },
+            // },
+        });
         const entities: Entity[] = result.map((sequelize: Sequelize) => sequelize.toJSON() as Entity);
         return entities;
     }    
@@ -14,7 +20,7 @@ class ImplementationSequelize implements Repository {
     async save (data: Entity): Promise<Entity | null> {
         try{
             const newEntity = await Sequelize.create({
-                name: data.name,
+                ...data
             });
             return newEntity.toJSON() as Entity;
         }catch {
@@ -37,18 +43,16 @@ class ImplementationSequelize implements Repository {
             const [affectedCount, updatedEntities] = await Sequelize.update({[field] : value }, { where: { id }, returning: true, });        
             if (affectedCount > 0 && updatedEntities.length > 0) {
                 return updatedEntities[0].toJSON() as Entity;
-            }
-        
+            }        
             return null;
         } catch(e) {
-            console.log(e)
             return null
         }
     }
 
     async update_image(id : string, image_id: string): Promise<Entity | null> {     
         try {            
-            const [affectedCount, updatedEntities] = await Sequelize.update({ imageId: image_id }, { where: { id: id }, returning: true });
+            const [affectedCount, updatedEntities] = await Sequelize.update({ image_id: image_id }, { where: { id: id }, returning: true });
 
             if (affectedCount > 0 && updatedEntities.length > 0) {                
                 return await this.getById(id)

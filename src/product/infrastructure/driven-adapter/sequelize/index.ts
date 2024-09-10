@@ -15,37 +15,45 @@ ProductSequelize.init(
             primaryKey: true,
         },
         title: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         brand: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         discount: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
         },
         price: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
         },
         price_offer: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
         },
         price_card: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
         },
         image: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         url: {
             type: DataTypes.TEXT,
         },
         category_main: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
         },
         category: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
         },
         subcategory: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
+        },
+        shop_id: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'shop',
+                key: 'id'
+            },
+            allowNull: true,
         },
     },
     {

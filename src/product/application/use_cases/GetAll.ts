@@ -12,8 +12,9 @@ export class GetAllUseCase {
         this._repository = repository
     }
 
-    async run(): Promise<Entity[] | null > {
-        const entities: Entity[] | null = await this._repository.getAll()
-        return entities.map((entity) => ProductDtoMapper.toJson(entity))
+    async run(shop_id: string, page: number, pageSize: number): Promise<{ data: Entity[], total: number } | null > {
+        const result = await this._repository.getAll(shop_id, page, pageSize);
+        const entities = result.rows.map((entity) => ProductDtoMapper.toJson(entity));
+        return { data: entities, total: result.count }; // Retorna los datos y el total de registros
     }
 }

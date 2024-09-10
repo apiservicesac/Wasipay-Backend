@@ -8,11 +8,13 @@ export const updateController = async (req: Request, res: Response, next: NextFu
     try {
         const entityId = req.params.id;
         
-        const { name } = req.body;
+        const {  name, description, social_media } = req.body;
 
 
         const data : Entity = {
             name,
+            description, 
+            social_media
         }
         
         const repository = new ImplementationSequelize()

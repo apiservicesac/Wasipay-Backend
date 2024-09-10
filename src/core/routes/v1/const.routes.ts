@@ -22,7 +22,7 @@ export const ROUTES_SHOP = {
 }
 
 const PRODUCT : string = '/product'
-const PRODUCT_GET_ALL : string = '/get-all'
+const PRODUCT_GET_ALL : string = '/get-all/:shop_id'
 const PRODUCT_GET_BY_ID : string = '/get-by-id/:id'
 
 export const ROUTES_PRODUCT = {

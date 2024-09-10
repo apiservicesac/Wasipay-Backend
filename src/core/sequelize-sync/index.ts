@@ -7,14 +7,7 @@ import { UserSequelize } from "@/user/infrastructure/driven-adapter/sequelize";
 
 // Sincronizar las tablas en el orden correcto
 sequelize.sync({ force: false })
-    .then(async () => {
-
-        await ProductSequelize.sync().then(() => {
-            loggerDataBase.warn('TABLA Product => Las tablas se han sincronizado correctamente');
-        })
-        .catch((error) => {
-            loggerDataBase.warn('TABLA Product => Error al sincronizar las tablas:', error);
-        });
+    .then(async () => {        
 
         await ImageSequelize.sync().then(() => {
             loggerDataBase.warn('TABLA Image => Las tablas se han sincronizado correctamente');
@@ -28,6 +21,13 @@ sequelize.sync({ force: false })
         })
         .catch((error) => {
             loggerDataBase.warn('TABLA Shop => Error al sincronizar las tablas:', error);
+        });
+
+        await ProductSequelize.sync().then(() => {
+            loggerDataBase.warn('TABLA Product => Las tablas se han sincronizado correctamente');
+        })
+        .catch((error) => {
+            loggerDataBase.warn('TABLA Product => Error al sincronizar las tablas:', error);
         });
         
         await UserSequelize.sync().then(() => {
