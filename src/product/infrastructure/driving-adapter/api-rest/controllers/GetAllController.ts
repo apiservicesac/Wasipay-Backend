@@ -7,10 +7,14 @@ export const getAllController = async (req: Request, res: Response, next: NextFu
         const { shop_id } = req.params;
         const page = parseInt(req.query.page as string) || 1;
         const pageSize = 20;
+        const sortBy = req.query.sortby as string || 'price_offer';
+        const sortOrder = (req.query.sortorder as 'ASC' | 'DESC') || 'ASC';
+        const priceRange = req.query.price as string || '';
+        const search = req.query.search as string || '';
 
         const repository = new ImplementationSequelize();
         const useCase = new UseCase(repository);
-        const result = await useCase.run(shop_id, page, pageSize);
+        const result = await useCase.run(shop_id, page, pageSize, sortBy, sortOrder, priceRange, search);
 
         res.status(200).json({
             status: 'success',
