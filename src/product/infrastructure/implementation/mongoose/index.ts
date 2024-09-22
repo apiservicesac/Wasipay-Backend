@@ -4,11 +4,43 @@ import { ProductMongoose as Mongoose } from '@/product/infrastructure/driven-ada
 
 class ImplementationMongoose implements Repository {
 
-    async getAll(shop_id: string): Promise<Entity[]> {
-        const result = await Mongoose.find({ shop_id: shop_id }).populate("images");
+    async getAll(
+        shop_id: string,
+        page: number,
+        pageSize: number,
+        sortBy: string,
+        sortOrder: 'ASC' | 'DESC',
+        priceRange: string = '',
+        search: string = ''
+    ): Promise<{ rows: Entity[], count: number }> {
+    
+        const offset = (page - 1) * pageSize;
+    
+        // Extraer los valores mínimo y máximo del rango de precios
+        const [minPrice, maxPrice] = priceRange ? priceRange.split('-').map(Number) : [null, null];
+    
+        // Crear el objeto de filtro de búsqueda
+        const query: any = {
+            shop_id: shop_id,
+            ...(minPrice && maxPrice ? { price: { $gte: minPrice, $lte: maxPrice } } : {}),
+            ...(search ? { name: { $regex: search, $options: 'i' } } : {}) // búsqueda insensible a mayúsculas/minúsculas
+        };
+    
+        // Obtener la cantidad total de registros que coinciden con los filtros
+        const count = await Mongoose.countDocuments(query);
+    
+        // Ejecutar la consulta con paginación, ordenación y filtros
+        const result = await Mongoose.find(query)
+            .populate('images')
+            .sort({ [sortBy]: sortOrder === 'ASC' ? 1 : -1 })  // Ordenar según el campo especificado
+            .skip(offset)
+            .limit(pageSize);
+    
         const entities: Entity[] = result.map((data: any) => data.toJSON() as Entity);
-        return entities;
-    }   
+    
+        return { rows: entities, count };
+    }
+    
 
     async getById(id: string): Promise<Entity | null> {
         try {
