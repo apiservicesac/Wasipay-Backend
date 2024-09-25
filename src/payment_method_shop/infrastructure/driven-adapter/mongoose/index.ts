@@ -14,10 +14,6 @@ const PaymentMethodShopSchema = new conector_mongoose.Schema({
     currency_type: {
         type: String, enum: ['PEN', 'USD'], required: true 
     },
-    image: {
-        type: conector_mongoose.Types.ObjectId, 
-        ref: "Image",        
-    },
 }, { timestamps: true });
 
 const PaymentMethodShopMongoose = conector_mongoose.model('PaymentMethodShop', PaymentMethodShopSchema);

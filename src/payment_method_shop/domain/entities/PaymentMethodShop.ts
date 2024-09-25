@@ -7,8 +7,7 @@ export interface PaymentMethodShopEntity {
     payment_method?: string | PaymentMethodEntity;
     account_number?: string;
     interbank_account_number?: string;
-    currency_type?: CurrencyType;
-    image?: string | ImageEntity;
+    currency_type?: CurrencyType;    
     createdAt?: Date;
     updatedAt?: Date;
 }
