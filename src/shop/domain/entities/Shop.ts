@@ -1,5 +1,4 @@
 import { ImageEntity } from "@/image_uploader/domain/entities";
-import { PaymentMethodEntity } from "@/payment_method/domain/entities";
 
 export interface ShopEntity {
     _id?: string;
@@ -11,7 +10,6 @@ export interface ShopEntity {
     email?: string;
     phone?: string;
     image?: ImageEntity;
-    payment_method?: string[] | PaymentMethodEntity[];
     social_media?: {
         facebook?: string;
         tiktok?: string;

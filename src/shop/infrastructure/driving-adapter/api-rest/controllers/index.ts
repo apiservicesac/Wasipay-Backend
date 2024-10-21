@@ -1,10 +1,10 @@
-import { createController } from './CreateController'
-import { getAllController } from './GetAllController'
-import { getByIdController } from './GetByIdController'
-import { deleteController } from './DeleteController'
-import { updateController } from './UpdateController'
-import { updateFieldController } from './UpdateFieldController'
-import { updateImageController } from './UpdateImageController'
+import { createController } from './create'
+import { getAllController } from './getAll'
+import { getByIdController } from './getById'
+import { deleteController } from './delete'
+import { updateController } from './update'
+import { updateFieldController } from './updateField'
+import { updateImageController } from './updateImage'
 
 export {
     createController,
