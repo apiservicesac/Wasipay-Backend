@@ -43,6 +43,7 @@ export const updateImageController = async (req: Request, res: Response, next: N
         })
 
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

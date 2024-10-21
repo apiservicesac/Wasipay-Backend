@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   mongo-wasipay:
@@ -8,8 +8,8 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /opt/mongo_wasipay/data:/data/db
-      - /opt/mongo_wasipay/log:/var/log/mongodb
+      - /opt/wasipay-app/data-base/data:/data/db
+      - /opt/wasipay-app/data-base/log:/var/log/mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: wasipay
       MONGO_INITDB_ROOT_PASSWORD: wasipay
