@@ -1,10 +1,7 @@
-import dotenv from 'dotenv'
 import { Backend } from '@/core/Backend'
 
 try {
-    dotenv.config({
-        path: '../.env'
-    })
+    process.loadEnvFile()
     new Backend().start()
 }catch (error) {
     console.log(error)

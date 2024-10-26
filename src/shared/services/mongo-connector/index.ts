@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { loggerDataBase } from '@/shared/utils/Logger';
-import dotenv from 'dotenv';
-dotenv.config();
+
+process.loadEnvFile()
 
 const {
   DB_NAME = 'test',
