@@ -1,14 +1,13 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { DeleteUseCase as UseCase } from '@/shop/application/use_cases';
-import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
+import { mongooseRepository } from '@/shop/infrastructure/implementation/mongoose';
 
 export const deleteController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         
         const entityId = req.params.id;
 
-        const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
         
         await useCase.run(entityId)

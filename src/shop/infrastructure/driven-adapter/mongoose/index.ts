@@ -1,7 +1,6 @@
 import { mongoose as conector_mongoose } from '@/shared/services/mongo-connector'
 
 const ShopSchema = new conector_mongoose.Schema({
-
     name: {
         type: String,
         required: true,
@@ -25,14 +24,13 @@ const ShopSchema = new conector_mongoose.Schema({
     phone: {
         type: String,
     },
+    image: {
+        type: String,
+    },
     social_media: {
         type: Map,
         of: String
-    },
-    image: {
-        type: conector_mongoose.Types.ObjectId, 
-        ref: "Image",        
-    },
+    },    
 }, { timestamps: true });
 
 const ShopMongoose = conector_mongoose.model('Shop', ShopSchema);

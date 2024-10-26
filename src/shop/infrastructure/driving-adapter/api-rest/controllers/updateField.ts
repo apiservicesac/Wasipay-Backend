@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 import { UpdateFieldUseCase as UseCase } from '@/shop/application/use_cases';
-import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
+import { mongooseRepository } from '@/shop/infrastructure/implementation/mongoose';
 
 export const updateFieldController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -9,7 +9,6 @@ export const updateFieldController = async (req: Request, res: Response, next: N
 
         const { field, value } = req.body;
         
-        const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
         const datUpdated = await useCase.run(entityId, field, value)
 

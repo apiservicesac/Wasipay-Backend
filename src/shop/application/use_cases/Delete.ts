@@ -11,7 +11,7 @@ export class DeleteUseCase {
         this._repository = repository
     }
 
-    async run(id: string): Promise<void | null > {
+    async run(id: string): Promise<void> {
        
         const deleted = await this._repository.delete(id)
 

@@ -2,14 +2,13 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ShopEntity as Entity } from '@/shop/domain/entities';
 import { UpdateUseCase as UseCase } from '@/shop/application/use_cases';
-import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
+import { mongooseRepository } from '@/shop/infrastructure/implementation/mongoose';
 
 export const updateController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const entityId = req.params.id;
         
-        const { name, description, address, city, country, email, phone, social_media } = req.body;
-
+        const { name, description, address, city, country, email, phone, image, social_media } = req.body;
 
         const data : Entity = {
             name,
@@ -19,10 +18,10 @@ export const updateController = async (req: Request, res: Response, next: NextFu
             country,
             email,
             phone,
+            image,
             social_media
         }
         
-        const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
         const datUpdated = await useCase.run(entityId, data)
 

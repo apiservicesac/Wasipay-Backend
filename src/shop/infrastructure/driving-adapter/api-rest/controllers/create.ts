@@ -2,12 +2,12 @@ import { NextFunction, Request, Response } from 'express'
 
 import { ShopEntity as Entity } from '@/shop/domain/entities';
 import { CreateUseCase as UseCase } from '@/shop/application/use_cases';
-import { ImplementationMongoose } from '@/shop/infrastructure/implementation/mongoose';
+import { mongooseRepository } from '@/shop/infrastructure/implementation/mongoose';
 
 export const createController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         
-        const { name, description, address, city, country, email, phone, social_media } = req.body;
+        const { name, description, address, city, country, email, phone, image, social_media } = req.body;
 
         const data : Entity = {
             name,
@@ -17,10 +17,9 @@ export const createController = async (req: Request, res: Response, next: NextFu
             country,
             email,
             phone,
+            image,
             social_media
         }
-        
-        const mongooseRepository = new ImplementationMongoose()
         const useCase = new UseCase(mongooseRepository)
         const dataCreated = await useCase.run(data)
 
